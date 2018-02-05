@@ -41,6 +41,7 @@ public class StartMenu extends AppCompatActivity {
     }
 
     public void start_test(View view) {
-
+        Intent intent = new Intent(this, FirstTest.class);
+        startActivity(intent);
     }
 }
