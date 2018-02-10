@@ -14,8 +14,8 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         Intent myIntent = getIntent(); // gets the previously created intent
-        String firstKeyName = myIntent.getStringExtra("name"); // will return "FirstKeyValue"
-        String secondKeyName= myIntent.getStringExtra("age"); // will return "SecondKeyValue"
+        String firstKeyName = myIntent.getStringExtra("test1_time"); // will return "FirstKeyValue"
+        String secondKeyName= myIntent.getStringExtra("test1_score"); // will return "SecondKeyValue"
 
         final TextView name = (TextView)findViewById(R.id.textName);
         final TextView age = (TextView)findViewById(R.id.textAge);
