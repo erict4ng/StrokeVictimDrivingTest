@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class StartMenu extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +46,17 @@ public class StartMenu extends AppCompatActivity {
     }
 
     public void start_test(View view) {
-        Intent intent = new Intent(this, FirstTest.class);
-        startActivity(intent);
+        EditText pass_box = findViewById(R.id.txtbxPass);
+        TextView warning = findViewById(R.id.txtWarning);
+        String entered_pass = pass_box.getText().toString();
 
+        if(entered_pass.equals("123")) {
+            Intent intent = new Intent(this, FirstTest.class);
+            startActivity(intent);
+        }
+        else{
+            warning.setVisibility(View.VISIBLE);
+        }
 
     }
 }

@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class FirstTest extends AppCompatActivity {
 
     private float xCoOrdinate, yCoOrdinate;
-    long timeleft;
+    long time_left;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class FirstTest extends AppCompatActivity {
         new CountDownTimer(900000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
-                timeleft = millisUntilFinished / 1000;
+                time_left = millisUntilFinished / 1000;
             }
 
             public void onFinish() {
@@ -63,7 +63,7 @@ public class FirstTest extends AppCompatActivity {
 
     public void startNextTest(View view){
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("test1_score",String.valueOf(timeleft));
+        intent.putExtra("test1_score",String.valueOf(time_left));
         intent.putExtra("test1_time","8");
         startActivity(intent);
     }
