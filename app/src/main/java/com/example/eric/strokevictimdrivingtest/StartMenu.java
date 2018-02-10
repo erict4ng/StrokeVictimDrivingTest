@@ -48,10 +48,12 @@ public class StartMenu extends AppCompatActivity {
     public void start_test(View view) {
         EditText pass_box = findViewById(R.id.txtbxPass);
         TextView warning = findViewById(R.id.txtWarning);
-        String entered_pass = pass_box.getText().toString();
 
-        if(entered_pass.equals("123")) {
+        if(pass_box.getText().toString().equals("123")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", pass_box.getText().toString());
             Intent intent = new Intent(this, FirstTest.class);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
         else{

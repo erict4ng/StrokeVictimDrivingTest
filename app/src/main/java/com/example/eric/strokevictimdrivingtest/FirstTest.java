@@ -62,9 +62,13 @@ public class FirstTest extends AppCompatActivity {
     }
 
     public void startNextTest(View view){
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("test1_score", "8");
+        bundle.putString("test1_time",String.valueOf(time_left));
+
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("test1_score",String.valueOf(time_left));
-        intent.putExtra("test1_time","8");
+        intent.putExtras(bundle);
+
         startActivity(intent);
     }
 }

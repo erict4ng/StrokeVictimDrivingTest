@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtbxPass"
-        app:layout_constraintVertical_bias="0.356" />
+        app:layout_constraintVertical_bias="0.586" />
 
     <EditText
         android:id="@+id/txtbxPass"
@@ -46,6 +46,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +60,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Code not found, please try again."
+        android:textColor="@color/colorAccent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnStart_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtbxPass"
-        tools:text="Identificaiton code not found, please try again."
-        tools:visibility="invisible" />
+        app:layout_constraintTop_toBottomOf="@+id/txtbxPass" />
 
 </android.support.constraint.ConstraintLayout>
