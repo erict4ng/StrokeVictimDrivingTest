@@ -6,13 +6,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import java.util.Arrays;
+
 
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
+    public Integer[] mThumbIds;
 
-    public ImageAdapter(Context c) {
-        mContext = c;
+    public ImageAdapter(Context c, Integer[] mThumbIds) {
+        this.mThumbIds = mThumbIds;
+        this.mContext = c;
     }
 
     public int getCount() {
@@ -27,7 +31,9 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
+    public void pushchanges(Integer[] mThumbIds){
+
+    }
 
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -41,12 +47,13 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(R.drawable.cross);
+        imageView.setImageResource(mThumbIds[position]);
         return imageView;
-    }
 
-    public void setCrossed(int position, boolean crossed){
 
     }
+
+
+
 
 }

@@ -7,20 +7,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FirstTest extends AppCompatActivity {
 
     long time_left;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[432];
+    public Integer[] mThumbIds = new Integer[432];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_test);
         final TextView timerText = findViewById(R.id.timerTxt);
+        Arrays.fill(mThumbIds, R.drawable.cross);
 
         new CountDownTimer(900000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -33,18 +40,21 @@ public class FirstTest extends AppCompatActivity {
         }.start();
 
         androidGridView = findViewById(R.id.gridCrossGrid);
-        androidGridView.setAdapter(new ImageAdapter(this));
+        androidGridView.setAdapter(new ImageAdapter(this, mThumbIds));
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (!matrix_test[position]) {
                     matrix_test[position] = true;
-
+                    mThumbIds[position] = R.drawable.clear;
                     Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+
                 }
                 else if(matrix_test[position]) {
                     matrix_test[position] = false;
+                    mThumbIds[position] = R.drawable.cross;
                     Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -82,5 +92,9 @@ public class FirstTest extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+
+
+
 }
 
