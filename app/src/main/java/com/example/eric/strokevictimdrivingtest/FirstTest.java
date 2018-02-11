@@ -4,39 +4,45 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FirstTest extends AppCompatActivity {
 
-    private float xCoOrdinate, yCoOrdinate;
     long time_left;
+    GridView androidGridView;
+    Integer[] matrix_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_test);
         final TextView timerText = findViewById(R.id.timerTxt);
-//        final TextView xText = findViewById(R.id.txtX);
-//        final TextView yText = findViewById(R.id.txtY);
+
 
         new CountDownTimer(900000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
                 time_left = millisUntilFinished / 1000;
             }
-
             public void onFinish() {
                 timerText.setText("done!");
             }
         }.start();
 
-        ImageView dot_cancel_grid = (ImageView)findViewById(R.id.imgDotGrid);
+        androidGridView = findViewById(R.id.gridCrossGrid);
+        androidGridView.setAdapter(new ImageAdapter(this));
 
+        androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(FirstTest.this, "" + position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
 //        compass.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View view, MotionEvent event) {
