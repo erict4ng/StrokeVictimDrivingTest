@@ -22,12 +22,17 @@ public class FirstTest extends AppCompatActivity {
     boolean[] matrix_test = new boolean[432];
     public Integer[] mThumbIds = new Integer[432];
 
+    ImageAdapter adapter = new ImageAdapter(this, mThumbIds);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_test);
         final TextView timerText = findViewById(R.id.timerTxt);
-        Arrays.fill(mThumbIds, R.drawable.cross);
+
+        Arrays.fill(mThumbIds, R.drawable.clear);
+        Arrays.fill(matrix_test, false);
 
         new CountDownTimer(900000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -39,25 +44,46 @@ public class FirstTest extends AppCompatActivity {
             }
         }.start();
 
+
+
+
         androidGridView = findViewById(R.id.gridCrossGrid);
-        androidGridView.setAdapter(new ImageAdapter(this, mThumbIds));
+        androidGridView.setAdapter(adapter);
+
+        /*androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View imgView, int position, long id) {
+                //ImageView imageView = (ImageView) imgView;
+                //imageView.setImageResource(R.drawable.cross);
+                matrix_test[position] = true;
+                mThumbIds[position] = R.drawable.cross;
+                androidGridView.deferNotifyDataSetChanged();
+                adapter.notifyDataSetChanged();
+            }
+        });*/
+
+
+
+
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (!matrix_test[position]) {
                     matrix_test[position] = true;
-                    mThumbIds[position] = R.drawable.clear;
+                    mThumbIds[position] = R.drawable.cross;
                     Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
-
                 }
                 else if(matrix_test[position]) {
                     matrix_test[position] = false;
-                    mThumbIds[position] = R.drawable.cross;
+                    mThumbIds[position] = R.drawable.clear;
                     Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
-
                 }
+
+                adapter.notifyDataSetChanged();
             }
         });
+
+
+
 //        compass.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View view, MotionEvent event) {
