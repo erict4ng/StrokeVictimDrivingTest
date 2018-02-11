@@ -27,8 +27,6 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-
-
     // create a new ImageView for each item referenced by the Adapter
 
 
@@ -45,6 +43,10 @@ public class ImageAdapter extends BaseAdapter {
         }
         imageView.setImageResource(R.drawable.cross);
         return imageView;
+    }
+
+    public void setCrossed(int position, boolean crossed){
+
     }
 
 }

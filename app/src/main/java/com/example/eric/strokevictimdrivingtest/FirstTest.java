@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,14 +14,13 @@ public class FirstTest extends AppCompatActivity {
 
     long time_left;
     GridView androidGridView;
-    Integer[] matrix_test;
+    boolean[] matrix_test = new boolean[432];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_test);
         final TextView timerText = findViewById(R.id.timerTxt);
-
 
         new CountDownTimer(900000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -39,8 +37,15 @@ public class FirstTest extends AppCompatActivity {
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(FirstTest.this, "" + position, Toast.LENGTH_SHORT).show();
+                if (!matrix_test[position]) {
+                    matrix_test[position] = true;
 
+                    Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                }
+                else if(matrix_test[position]) {
+                    matrix_test[position] = false;
+                    Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                }
             }
         });
 //        compass.setOnTouchListener(new View.OnTouchListener() {
