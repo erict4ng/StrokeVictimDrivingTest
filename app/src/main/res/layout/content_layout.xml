@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.eric.strokevictimdrivingtest.Login"
-    tools:showIn="@layout/activity_start_menu">
+    tools:showIn="@layout/activity_login">
 
     <TextView
         android:id="@+id/textView"

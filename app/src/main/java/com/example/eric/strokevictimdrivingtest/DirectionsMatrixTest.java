@@ -1,12 +1,10 @@
 package com.example.eric.strokevictimdrivingtest;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_directions_matrix_test);
 
         Bundle bundle = getIntent().getExtras(); // gets the previously created intent
 
@@ -65,7 +63,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
         ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
 
-        if (heldCardNo < 8)
+        if (heldCardNo < imageList.size())
         {
             heldCardNo = nextCardNo;
         }
@@ -75,7 +73,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
 
 
-        if (heldCardNo == 8)
+        if (heldCardNo == imageList.size())
         {
             nextCardNo = 0;
         }

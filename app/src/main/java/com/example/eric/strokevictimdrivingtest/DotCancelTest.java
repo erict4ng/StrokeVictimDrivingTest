@@ -25,7 +25,7 @@ public class DotCancelTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_test);
+        setContentView(R.layout.activity_dot_cancel_test);
         final TextView timerText = findViewById(R.id.timerTxt);
 
         Arrays.fill(mThumbIds, R.drawable.clear);
