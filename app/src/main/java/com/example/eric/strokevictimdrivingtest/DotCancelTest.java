@@ -25,7 +25,7 @@ public class DotCancelTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_test);
+        setContentView(R.layout.activity_dot_cancel_test);
         final TextView timerText = findViewById(R.id.timerTxt);
 
         Arrays.fill(mThumbIds, R.drawable.clear);
@@ -110,7 +110,7 @@ public class DotCancelTest extends AppCompatActivity {
         bundle.putString("test1_score", "8");
         bundle.putString("test1_time",String.valueOf(time_left));
 
-        Intent intent = new Intent(this, MatrixDirectionsTest.class);
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
         intent.putExtras(bundle);
 
         startActivity(intent);

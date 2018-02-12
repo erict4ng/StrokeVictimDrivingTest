@@ -11,28 +11,30 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".DotCancelTest"
-            android:screenOrientation="landscape"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Login">
             <meta-data
-                android:name= "android.support.PARENT_ACTIVITY"
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.eric.strokevictimdrivingtest.Login" />
         </activity>
-        <activity android:name=".MatrixDirectionsTest"></activity>
+        <activity android:name=".DirectionsMatrixTest" />
+        <activity android:name=".CompassMatrixTest"></activity>
     </application>
 
 </manifest>
