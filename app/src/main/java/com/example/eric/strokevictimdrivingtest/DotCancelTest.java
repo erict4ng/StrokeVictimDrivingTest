@@ -110,7 +110,7 @@ public class DotCancelTest extends AppCompatActivity {
         bundle.putString("test1_score", "8");
         bundle.putString("test1_time",String.valueOf(time_left));
 
-        Intent intent = new Intent(this, MatrixDirectionsTest.class);
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
         intent.putExtras(bundle);
 
         startActivity(intent);

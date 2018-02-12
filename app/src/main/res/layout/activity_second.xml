@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.eric.strokevictimdrivingtest.MatrixDirectionsTest">
+    tools:context="com.example.eric.strokevictimdrivingtest.DirectionsMatrixTest">
 
     <TextView
         android:id="@+id/textName"

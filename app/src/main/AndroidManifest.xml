@@ -32,7 +32,7 @@
                 android:name= "android.support.PARENT_ACTIVITY"
                 android:value="com.example.eric.strokevictimdrivingtest.Login" />
         </activity>
-        <activity android:name=".MatrixDirectionsTest"></activity>
+        <activity android:name=".DirectionsMatrixTest"></activity>
     </application>
 
 </manifest>

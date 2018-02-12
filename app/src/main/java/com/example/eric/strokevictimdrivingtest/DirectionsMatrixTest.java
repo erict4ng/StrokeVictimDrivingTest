@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatrixDirectionsTest extends AppCompatActivity {
+public class DirectionsMatrixTest extends AppCompatActivity {
     List<Integer> imageList = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
