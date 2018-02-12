@@ -9,12 +9,12 @@ import android.widget.ImageView;
 import java.util.Arrays;
 
 
-public class ImageAdapter extends BaseAdapter {
+public class DotImageAdapter extends BaseAdapter {
 
     private Context mContext;
     public Integer[] mThumbIds;
 
-    public ImageAdapter(Context c, Integer[] mThumbIds) {
+    public DotImageAdapter(Context c, Integer[] mThumbIds) {
         this.mThumbIds = mThumbIds;
         this.mContext = c;
     }
@@ -29,10 +29,6 @@ public class ImageAdapter extends BaseAdapter {
 
     public long getItemId(int position) {
         return 0;
-    }
-
-    public void pushchanges(Integer[] mThumbIds){
-
     }
 
 

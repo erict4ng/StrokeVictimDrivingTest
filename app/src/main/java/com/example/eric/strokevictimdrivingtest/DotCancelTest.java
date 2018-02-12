@@ -7,22 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class FirstTest extends AppCompatActivity {
+public class DotCancelTest extends AppCompatActivity {
 
     long time_left;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[432];
     public Integer[] mThumbIds = new Integer[432];
 
-    ImageAdapter adapter = new ImageAdapter(this, mThumbIds);
+    DotImageAdapter adapter = new DotImageAdapter(this, mThumbIds);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +67,12 @@ public class FirstTest extends AppCompatActivity {
                 if (!matrix_test[position]) {
                     matrix_test[position] = true;
                     mThumbIds[position] = R.drawable.cross;
-                    Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DotCancelTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
                 }
                 else if(matrix_test[position]) {
                     matrix_test[position] = false;
                     mThumbIds[position] = R.drawable.clear;
-                    Toast.makeText(FirstTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DotCancelTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
                 }
 
                 adapter.notifyDataSetChanged();
@@ -113,7 +110,7 @@ public class FirstTest extends AppCompatActivity {
         bundle.putString("test1_score", "8");
         bundle.putString("test1_time",String.valueOf(time_left));
 
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, MatrixDirectionsTest.class);
         intent.putExtras(bundle);
 
         startActivity(intent);

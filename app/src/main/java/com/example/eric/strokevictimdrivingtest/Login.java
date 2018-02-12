@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class StartMenu extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
 
     @Override
@@ -52,7 +52,7 @@ public class StartMenu extends AppCompatActivity {
         if(pass_box.getText().toString().equals("123")) {
             Bundle bundle = new Bundle();
             bundle.putString("id", pass_box.getText().toString());
-            Intent intent = new Intent(this, FirstTest.class);
+            Intent intent = new Intent(this, DotCancelTest.class);
             intent.putExtras(bundle);
             startActivity(intent);
         }

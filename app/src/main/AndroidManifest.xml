@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StartMenu"
+            android:name=".Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"
@@ -21,18 +21,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FirstTest"
+            android:name=".DotCancelTest"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".StartMenu">
+            android:parentActivityName=".Login">
             <meta-data
                 android:name= "android.support.PARENT_ACTIVITY"
-                android:value="com.example.eric.strokevictimdrivingtest.StartMenu" />
+                android:value="com.example.eric.strokevictimdrivingtest.Login" />
         </activity>
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".MatrixDirectionsTest"></activity>
     </application>
 
 </manifest>
