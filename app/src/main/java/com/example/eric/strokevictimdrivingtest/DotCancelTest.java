@@ -10,7 +10,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
+import java.util.Timer;
 
 public class DotCancelTest extends AppCompatActivity {
 
@@ -18,6 +21,7 @@ public class DotCancelTest extends AppCompatActivity {
     GridView androidGridView;
     boolean[] matrix_test = new boolean[432];
     public Integer[] mThumbIds = new Integer[432];
+    TextView timerText;
 
     DotImageAdapter adapter = new DotImageAdapter(this, mThumbIds);
 
@@ -26,41 +30,22 @@ public class DotCancelTest extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dot_cancel_test);
-        final TextView timerText = findViewById(R.id.timerTxt);
+        timerText = findViewById(R.id.timerTxt);
 
         Arrays.fill(mThumbIds, R.drawable.clear);
         Arrays.fill(matrix_test, false);
 
-        new CountDownTimer(900000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
-                time_left = millisUntilFinished / 1000;
-            }
-            public void onFinish() {
-                timerText.setText("done!");
-            }
-        }.start();
-
-
-
+        matrix_test[1] = true;
+        mThumbIds[1] = R.drawable.cross;
+        matrix_test[8] = true;
+        mThumbIds[8] = R.drawable.cross;
+        matrix_test[9] = true;
+        mThumbIds[9] = R.drawable.cross;
+        matrix_test[13] = true;
+        mThumbIds[13] = R.drawable.cross;
 
         androidGridView = findViewById(R.id.gridCrossGrid);
         androidGridView.setAdapter(adapter);
-
-        /*androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View imgView, int position, long id) {
-                //ImageView imageView = (ImageView) imgView;
-                //imageView.setImageResource(R.drawable.cross);
-                matrix_test[position] = true;
-                mThumbIds[position] = R.drawable.cross;
-                androidGridView.deferNotifyDataSetChanged();
-                adapter.notifyDataSetChanged();
-            }
-        });*/
-
-
-
-
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -79,33 +64,33 @@ public class DotCancelTest extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void hideInstructions(View view){
+        if ((matrix_test[1] == true) && (matrix_test[8] == true) && (matrix_test[9] == true) && (matrix_test[13] == true) &&
+                (matrix_test[14] == true) && (matrix_test[15] == true) && (matrix_test[17] == true) && (matrix_test[22] == true)){
+            final TextView txtInstructions = findViewById(R.id.txtInstructions);
+            txtInstructions.setVisibility(View.INVISIBLE);
 
-//        compass.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent event) {
-//                switch (event.getActionMasked()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        xCoOrdinate = view.getX() - event.getRawX();
-//                        yCoOrdinate = view.getY() - event.getRawY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        xText.setText(String.valueOf(view.getX()));
-//                        yText.setText(String.valueOf(view.getY()));
-//                        break;
-//                    default:
-//                        return false;
-//                }
-//
-//                return true;
-//            }
-//        });
+            new CountDownTimer(900000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    time_left = millisUntilFinished / 1000;
+                }
+                public void onFinish() {
+
+                    timerText.setText("done!");
+                }
+            }.start();
+
+        }
+
     }
 
     public void startNextTest(View view){
+
+
+
         Bundle bundle = getIntent().getExtras();
         bundle.putString("test1_score", "8");
         bundle.putString("test1_time",String.valueOf(time_left));

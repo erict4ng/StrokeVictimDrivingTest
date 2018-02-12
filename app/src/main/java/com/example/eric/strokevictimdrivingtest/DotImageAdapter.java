@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import java.util.Arrays;
 
 
 public class DotImageAdapter extends BaseAdapter {
@@ -20,14 +19,17 @@ public class DotImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
+
         return 432;
     }
 
     public Object getItem(int position) {
+
         return null;
     }
 
     public long getItemId(int position) {
+
         return 0;
     }
 

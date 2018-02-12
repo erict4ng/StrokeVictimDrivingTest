@@ -75,4 +75,8 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <string name="dotinstructions">As you can see that there are groups of dots arranged in rows. Some of the
+    groups have 3 dots, some 4 and some 5 dots. I want you to cross out every group of 4 dots. I want you to complete the first row as a practice. The task is timed but it is more important to be accurate than fast. Start
+    when you are ready. Press the "Begin tests" button below to begin. </string>
 </resources>

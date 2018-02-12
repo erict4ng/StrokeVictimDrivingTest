@@ -64,12 +64,36 @@
         android:columnWidth="37dp"
         android:gravity="center"
         android:numColumns="auto_fit"
-        android:rowHeight="20dp"
         android:stretchMode="columnWidth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtInstructions"
+        android:layout_width="915dp"
+        android:layout_height="544dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/background_light"
+        android:text="@string/dotinstructions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="hideInstructions"
+        android:text="Begin test"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="579dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -21,7 +21,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     long time_left;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[15];
-    public Integer[] mThumbIds = new Integer[15];
+    public Integer[] mThumbIds = new Integer[16];
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, mThumbIds);
 
