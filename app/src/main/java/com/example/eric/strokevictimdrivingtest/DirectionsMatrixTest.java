@@ -3,10 +3,14 @@ package com.example.eric.strokevictimdrivingtest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DirectionsMatrixTest extends AppCompatActivity {
@@ -14,47 +18,67 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     int heldCardNo = 0;
     int nextCardNo = 1;
 
+    long time_left;
+    GridView androidGridView;
+    boolean[] matrix_test = new boolean[15];
+    public Integer[] mThumbIds = new Integer[15];
+
+    DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, mThumbIds);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_matrix_test);
 
-        Bundle bundle = getIntent().getExtras(); // gets the previously created intent
-
-        String value = bundle.getString("id");
-
-//        String firstKeyName = myIntent.getStringExtra("test1_time"); // will return "FirstKeyValue"
-//        String secondKeyName= myIntent.getStringExtra("test1_score"); // will return "SecondKeyValue"
-
-        final TextView name = (TextView)findViewById(R.id.textName);
-        //final TextView age = (TextView)findViewById(R.id.textAge);
-
-        name.setText(value);
-
-        ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
-        ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
+        //ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
+        //ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
 
         //nextCard.setImageResource(R.drawable.bothAway);
         //currentCard.setImageResource(R.drawable.test2Example);
 
-//        imageList.add(R.drawable.bothAway);
-//        imageList.add(R.drawable.bothFront);
-//        imageList.add(R.drawable.bothRight);
-//        imageList.add(R.drawable.leftLorryRightCar);
-//        imageList.add(R.drawable.lorryAwayCarForward);
-//        imageList.add(R.drawable.lorryAwayCarLeft);
-//        imageList.add(R.drawable.lorryAwayCarRight);
-//        imageList.add(R.drawable.lorryForwardCarAway);
-//        imageList.add(R.drawable.lorryForwardCarLeft);
-//        imageList.add(R.drawable.lorryForwardCarRight);
-//        imageList.add(R.drawable.lorryLeftCarAway);
-//        imageList.add(R.drawable.lorryLeftCarForward);
-//        imageList.add(R.drawable.bothLeft);
-//        imageList.add(R.drawable.lorryRightCarForward);
-//        imageList.add(R.drawable.lorryRightCarLeft);
-//        imageList.add(R.drawable.test2Example);
+        Arrays.fill(mThumbIds, R.drawable.car_east_southeast);
+        Arrays.fill(matrix_test, false);
 
 
+        imageList.add(R.drawable.both_away);
+        imageList.add(R.drawable.both_front);
+        imageList.add(R.drawable.both_right);
+        imageList.add(R.drawable.left_lorry_right_car);
+        imageList.add(R.drawable.lorry_away_car_forward);
+        imageList.add(R.drawable.lorry_away_car_left);
+        imageList.add(R.drawable.lorry_away_car_right);
+        imageList.add(R.drawable.lorry_forward_car_away);
+        imageList.add(R.drawable.lorry_forward_car_left);
+        imageList.add(R.drawable.lorry_forward_car_right);
+        imageList.add(R.drawable.lorry_left_car_away);
+        imageList.add(R.drawable.lorry_left_car_forward);
+        imageList.add(R.drawable.both_left);
+        imageList.add(R.drawable.lorry_right_car_forward);
+        imageList.add(R.drawable.lorry_right_car_left);
+        imageList.add(R.drawable.directions_example);
+
+
+        androidGridView = findViewById(R.id.directionsBoardGrid);
+        androidGridView.setAdapter(adapter);
+
+
+        androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                if (!matrix_test[position]) {
+                    matrix_test[position] = true;
+                    mThumbIds[position] = heldCardNo;
+                    Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                }
+                else if(matrix_test[position]) {
+                    matrix_test[position] = false;
+                    mThumbIds[position] = R.drawable.clear;
+                    Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -63,7 +87,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
         ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
 
-        if (heldCardNo < imageList.size())
+        if (heldCardNo < (imageList.size() - 1))
         {
             heldCardNo = nextCardNo;
         }
@@ -73,7 +97,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
 
 
-        if (heldCardNo == imageList.size())
+        if (heldCardNo == (imageList.size() - 1))
         {
             nextCardNo = 0;
         }
