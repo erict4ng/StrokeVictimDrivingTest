@@ -1,9 +1,12 @@
 package com.example.eric.strokevictimdrivingtest;
 
+import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,15 +18,16 @@ import java.util.List;
 
 public class DirectionsMatrixTest extends AppCompatActivity {
     List<Integer> imageList = new ArrayList<Integer>();
+
     int heldCardNo = 0;
     int nextCardNo = 1;
+    Boolean firstClick = true;
 
-    long time_left;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
-    public Integer[] mThumbIds = new Integer[16];
+    public Integer[] directionsAnswerGrid = new Integer[16];
 
-    DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, mThumbIds);
+    DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, directionsAnswerGrid);
 
 
     @Override
@@ -31,7 +35,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_matrix_test);
 
-        Arrays.fill(mThumbIds, R.drawable.car_east_southeast);
+        Arrays.fill(directionsAnswerGrid, R.drawable.car_east_southeast);
         Arrays.fill(matrix_test, false);
 
 
@@ -50,30 +54,88 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         imageList.add(R.drawable.both_left);
         imageList.add(R.drawable.lorry_right_car_forward);
         imageList.add(R.drawable.lorry_right_car_left);
-        imageList.add(R.drawable.directions_example);
 
 
         androidGridView = findViewById(R.id.directionsBoardGrid);
         androidGridView.setAdapter(adapter);
 
 
+
+
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                if (!matrix_test[position]) {
-                    matrix_test[position] = true;
-                    mThumbIds[position] = imageList.get(heldCardNo - 1);
-                    Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
+                ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
+
+                if(firstClick)
+                {
+                    directionsAnswerGrid[position] = R.drawable.directions_example;
+
+                    currentCard.setImageResource(imageList.get(heldCardNo));
+                    nextCard.setImageResource(imageList.get(nextCardNo));
+                    firstClick = false;
+
                 }
-                else if(matrix_test[position]) {
-                    matrix_test[position] = false;
-                    mThumbIds[position] = R.drawable.clear;
-                    Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                else if(!firstClick)
+                {
+
+                    if (!matrix_test[position])
+                    {
+                        if (directionsAnswerGrid[position] != R.drawable.clear)
+                        {
+                            Integer temp = directionsAnswerGrid[position];
+                            directionsAnswerGrid[position] = imageList.get(heldCardNo);
+                            imageList.set(heldCardNo, temp);
+                            currentCard.setImageResource(imageList.get(heldCardNo));
+                        }
+                        else
+                        {
+                            directionsAnswerGrid[position] = imageList.get(heldCardNo);
+                            imageList.remove(heldCardNo);
+                            heldCardNo = nextCardNo;
+
+                            if (heldCardNo == (imageList.size() - 1))
+                            {
+                                nextCardNo = 0;
+                            }
+                            else
+                            {
+                                nextCardNo = heldCardNo + 1;
+                            }
+
+                            currentCard.setImageResource(imageList.get(heldCardNo));
+                            nextCard.setImageResource(imageList.get(nextCardNo));
+                        }
+
+
+                        Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if (matrix_test[position])
+                    {
+
+                        directionsAnswerGrid[position] = R.drawable.clear;
+                        Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
 
                 adapter.notifyDataSetChanged();
             }
         });
 
+    }
+
+    public void startTest(View view){
+        Arrays.fill(directionsAnswerGrid, R.drawable.clear);
+        adapter.notifyDataSetChanged();
+
+        TextView instructions = (TextView) findViewById(R.id.instructionsTest);
+        Button startTest = (Button) findViewById(R.id.startButton);
+
+        instructions.setVisibility(View.INVISIBLE);
+        startTest.setVisibility(View.INVISIBLE);
     }
 
     //onClick to add to the stack of card images
@@ -105,4 +167,22 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         nextCard.setImageResource(imageList.get(nextCardNo));
 
     }
+
+
+    public void startNextTest(View view){
+        //long elapsedMillis = (SystemClock.elapsedRealtime() - overtime.getBase()) / 1000;
+        //timerText.setText(String.valueOf(elapsedMillis));
+        //overtime.stop();
+
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("test1_score", "8");
+        //bundle.putString("test1_time",String.valueOf(time_left));
+
+        Intent intent = new Intent(this, CompassMatrixTest.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
+
 }
