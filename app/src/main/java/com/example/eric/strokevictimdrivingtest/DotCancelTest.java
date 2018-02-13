@@ -2,28 +2,21 @@ package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
-import java.util.Timer;
 
 public class DotCancelTest extends AppCompatActivity {
 
     //declare timer variables
     long time_left;
     long time_taken;
-    long timelimit = 5000;
+    long timelimit = 15000;
 
     public Integer[] DotAnswerGrid = new Integer[432];
     public Integer[] DotCorrectGrid = new Integer[432];
@@ -34,12 +27,10 @@ public class DotCancelTest extends AppCompatActivity {
 
     //declare misc variables
     public Button nextTest;
-    public TextView txtTime;
     CountDownTimer timer;
     public int notCrossed;
     public int wrongCrossed;
-
-
+    public TextView textWarning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +39,9 @@ public class DotCancelTest extends AppCompatActivity {
         setContentView(R.layout.activity_dot_cancel_test);
         //sets up next test button and sets to invisible so user cannot go to next test until they have gone through instructions
         nextTest = findViewById(R.id.btnNexttest);
-        nextTest.setVisibility(View.INVISIBLE);
 
-        txtTime = findViewById(R.id.timerTxt);
+        textWarning = findViewById(R.id.txtWarning);
+        loadanswersgrid();
 
         //fills array with clear images
         Arrays.fill(DotAnswerGrid, R.drawable.clear);
@@ -66,11 +57,9 @@ public class DotCancelTest extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (DotAnswerGrid[position] == R.drawable.clear) {
                     DotAnswerGrid[position] = R.drawable.cross;
-                    Toast.makeText(DotCancelTest.this, "" + DotAnswerGrid[position], Toast.LENGTH_SHORT).show();
                 }
                 else if(DotAnswerGrid[position] != R.drawable.clear) {
                     DotAnswerGrid[position] = R.drawable.clear;
-                    Toast.makeText(DotCancelTest.this, "" + DotAnswerGrid[position], Toast.LENGTH_SHORT).show();
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -80,35 +69,46 @@ public class DotCancelTest extends AppCompatActivity {
     public void hideInstructions(View view){
         if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
                 (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
-            final TextView txtInstructions = findViewById(R.id.txtInstructions);
+            final TextView txtInstructions = findViewById(R.id.txtDialog);
             txtInstructions.setVisibility(View.INVISIBLE);
             nextTest.setVisibility(View.VISIBLE);
 
             timer = new CountDownTimer(timelimit, 1000) {
                 public void onTick(long millisUntilFinished) {
                     time_left = millisUntilFinished / 1000;
-                    txtTime.setText("seconds remaining: " + time_left);
                 }
                 public void onFinish() {
                     time_left = 0;
+
+                    for (int i=23; i <DotAnswerGrid.length; i++){
+                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+                            notCrossed += 1;
+                        }
+                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+                            wrongCrossed += 1;
+                        }
+                    }
                 }
             }.start();
+            textWarning.setText("");
+        }else{
+            textWarning.setText(R.string.instructionswrong);
         }
     }
 
     public void startNextTest(View view){
-
-        loadanswersgrid();
         time_taken = (timelimit / 1000) - time_left;
-        txtTime.setText("taken: " + time_taken);
+
         timer.cancel();
 
-        for (int i=23; i <DotAnswerGrid.length; i++){
-            if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
-                notCrossed += 1;
-            }
-            if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
-                wrongCrossed += 1;
+        if(time_taken * 1000 != timelimit){
+            for (int i=23; i <DotAnswerGrid.length; i++){
+                if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+                    notCrossed += 1;
+                }
+                if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+                    wrongCrossed += 1;
+                }
             }
         }
 

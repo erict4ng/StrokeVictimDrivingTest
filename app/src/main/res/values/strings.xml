@@ -80,5 +80,8 @@
     groups have 3 dots, some 4 and some 5 dots. I want you to cross out every group of 4 dots. I want you to complete the first row as a practice. The task is timed but it is more important to be accurate than fast. Start
     when you are ready. Press the "Begin tests" button below to begin. </string>
 
+    <string name="instructionswrong">you have missed a set of 4 dots here or you have crossed
+out a group of 3 dots but the task is to cross out all the groups of 4 dots </string>
+
     <string name="directioninstructions"> The large arrows correspond to the lorries and the small arrows to the cars. Each arrow indicates a direction of travel. I want you to position these cards (indicate the car/lorry cards) so that each car is travelling in the direction indicated by the small arrow and each lorry in the direction indicated by the large arrow. I will do the first one as an example</string>
 </resources>
