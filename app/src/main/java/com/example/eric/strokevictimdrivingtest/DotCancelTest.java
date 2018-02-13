@@ -20,13 +20,25 @@ import java.util.Timer;
 
 public class DotCancelTest extends AppCompatActivity {
 
+    //declare timer variables
     long time_left;
+    long time_taken;
+    long timelimit = 5000;
+
+    public Integer[] DotAnswerGrid = new Integer[432];
+    public Integer[] DotCorrectGrid = new Integer[432];
+
+    //declare gridview variables
     GridView androidGridView;
-    boolean[] matrix_test = new boolean[432];
-    public Integer[] mThumbIds = new Integer[432];
-    public Chronometer timer;
-    DotImageAdapter adapter = new DotImageAdapter(this, mThumbIds);
+    DotImageAdapter adapter = new DotImageAdapter(this, DotAnswerGrid);
+
+    //declare misc variables
     public Button nextTest;
+    public TextView txtTime;
+    CountDownTimer timer;
+    public int score;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +49,27 @@ public class DotCancelTest extends AppCompatActivity {
         nextTest = findViewById(R.id.btnNexttest);
         nextTest.setVisibility(View.INVISIBLE);
 
-        //fills array with clear images
-        Arrays.fill(mThumbIds, R.drawable.clear);
-        Arrays.fill(matrix_test, false);
+        txtTime = findViewById(R.id.timerTxt);
 
-        matrix_test[1] = true;
-        mThumbIds[1] = R.drawable.cross;
-        matrix_test[8] = true;
-        mThumbIds[8] = R.drawable.cross;
-        matrix_test[9] = true;
-        mThumbIds[9] = R.drawable.cross;
-        matrix_test[13] = true;
-        mThumbIds[13] = R.drawable.cross;
+        //fills array with clear images
+        Arrays.fill(DotAnswerGrid, R.drawable.clear);
+
+        DotAnswerGrid[1] = R.drawable.cross;
+        DotAnswerGrid[8] = R.drawable.cross;
+        DotAnswerGrid[9] = R.drawable.cross;
+        DotAnswerGrid[13] = R.drawable.cross;
 
         androidGridView = findViewById(R.id.gridCrossGrid);
         androidGridView.setAdapter(adapter);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                if (!matrix_test[position]) {
-                    matrix_test[position] = true;
-                    mThumbIds[position] = R.drawable.cross;
-                    Toast.makeText(DotCancelTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                if (DotAnswerGrid[position] == R.drawable.clear) {
+                    DotAnswerGrid[position] = R.drawable.cross;
+                    Toast.makeText(DotCancelTest.this, "" + DotAnswerGrid[position], Toast.LENGTH_SHORT).show();
                 }
-                else if(matrix_test[position]) {
-                    matrix_test[position] = false;
-                    mThumbIds[position] = R.drawable.clear;
-                    Toast.makeText(DotCancelTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+                else if(DotAnswerGrid[position] != R.drawable.clear) {
+                    DotAnswerGrid[position] = R.drawable.clear;
+                    Toast.makeText(DotCancelTest.this, "" + DotAnswerGrid[position], Toast.LENGTH_SHORT).show();
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -70,20 +77,39 @@ public class DotCancelTest extends AppCompatActivity {
     }
 
     public void hideInstructions(View view){
-        if ((matrix_test[1]) && (matrix_test[8]) && (matrix_test[9]) && (matrix_test[13]) &&
-                (matrix_test[14]) && (matrix_test[15]) && (matrix_test[17]) && (matrix_test[22])){
+        if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
+                (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
             final TextView txtInstructions = findViewById(R.id.txtInstructions);
             txtInstructions.setVisibility(View.INVISIBLE);
             nextTest.setVisibility(View.VISIBLE);
-            timer.setBase(SystemClock.elapsedRealtime());
-            timer.start();
+
+            timer = new CountDownTimer(timelimit, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    time_left = millisUntilFinished / 1000;
+                    txtTime.setText("seconds remaining: " + time_left);
+                }
+                public void onFinish() {
+                    time_left = 0;
+                }
+            }.start();
         }
     }
 
     public void startNextTest(View view){
 
-        long elapsedMillis = (SystemClock.elapsedRealtime() - timer.getBase()) / 1000;
-        timer.stop();
+        loadanswersgrid();
+
+        time_taken = (timelimit / 1000) - time_left;
+        txtTime.setText("taken: " + time_taken);
+        timer.cancel();
+
+        for (int i=0; i <DotAnswerGrid.length; i++){
+            if (DotAnswerGrid[i].equals(DotCorrectGrid[i])){
+                score += 1;
+            }
+        }
+
+        txtTime.setText("score " + score);
 
         Bundle bundle = getIntent().getExtras();
         bundle.putString("test1_score", "8");
@@ -95,8 +121,127 @@ public class DotCancelTest extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
+    public void loadanswersgrid() {
+        DotCorrectGrid[26] = R.drawable.cross;
+        DotCorrectGrid[31] = R.drawable.cross;
+        DotCorrectGrid[33] = R.drawable.cross;
+        DotCorrectGrid[34] = R.drawable.cross;
+        DotCorrectGrid[35] = R.drawable.cross;
+        DotCorrectGrid[39] = R.drawable.cross;
+        DotCorrectGrid[40] = R.drawable.cross;
+        DotCorrectGrid[47] = R.drawable.cross;
+        DotCorrectGrid[48] = R.drawable.cross;
+        DotCorrectGrid[49] = R.drawable.cross;
+        DotCorrectGrid[53] = R.drawable.cross;
+        DotCorrectGrid[61] = R.drawable.cross;
+        DotCorrectGrid[65] = R.drawable.cross;
+        DotCorrectGrid[70] = R.drawable.cross;
+        DotCorrectGrid[75] = R.drawable.cross;
+        DotCorrectGrid[76] = R.drawable.cross;
+        DotCorrectGrid[78] = R.drawable.cross;
+        DotCorrectGrid[82] = R.drawable.cross;
+        DotCorrectGrid[84] = R.drawable.cross;
+        DotCorrectGrid[90] = R.drawable.cross;
+        DotCorrectGrid[91] = R.drawable.cross;
+        DotCorrectGrid[94] = R.drawable.cross;
+        DotCorrectGrid[96] = R.drawable.cross;
+        DotCorrectGrid[98] = R.drawable.cross;
+        DotCorrectGrid[102] = R.drawable.cross;
+        DotCorrectGrid[107] = R.drawable.cross;
+        DotCorrectGrid[114] = R.drawable.cross;
+        DotCorrectGrid[115] = R.drawable.cross;
+        DotCorrectGrid[119] = R.drawable.cross;
+        DotCorrectGrid[122] = R.drawable.cross;
+        DotCorrectGrid[125] = R.drawable.cross;
+        DotCorrectGrid[126] = R.drawable.cross;
+        DotCorrectGrid[132] = R.drawable.cross;
+        DotCorrectGrid[134] = R.drawable.cross;
+        DotCorrectGrid[140] = R.drawable.cross;
+        DotCorrectGrid[141] = R.drawable.cross;
+        DotCorrectGrid[145] = R.drawable.cross;
+        DotCorrectGrid[152] = R.drawable.cross;
+        DotCorrectGrid[153] = R.drawable.cross;
+        DotCorrectGrid[157] = R.drawable.cross;
+        DotCorrectGrid[158] = R.drawable.cross;
+        DotCorrectGrid[159] = R.drawable.cross;
+        DotCorrectGrid[161] = R.drawable.cross;
+        DotCorrectGrid[166] = R.drawable.cross;
+        DotCorrectGrid[168] = R.drawable.cross;
+        DotCorrectGrid[170] = R.drawable.cross;
+        DotCorrectGrid[174] = R.drawable.cross;
+        DotCorrectGrid[181] = R.drawable.cross;
+        DotCorrectGrid[182] = R.drawable.cross;
+        DotCorrectGrid[185] = R.drawable.cross;
+        DotCorrectGrid[191] = R.drawable.cross;
+        DotCorrectGrid[194] = R.drawable.cross;
+        DotCorrectGrid[199] = R.drawable.cross;
+        DotCorrectGrid[201] = R.drawable.cross;
+        DotCorrectGrid[202] = R.drawable.cross;
+        DotCorrectGrid[203] = R.drawable.cross;
+        DotCorrectGrid[207] = R.drawable.cross;
+        DotCorrectGrid[215] = R.drawable.cross;
+        DotCorrectGrid[216] = R.drawable.cross;
+        DotCorrectGrid[217] = R.drawable.cross;
+        DotCorrectGrid[222] = R.drawable.cross;
+        DotCorrectGrid[223] = R.drawable.cross;
+        DotCorrectGrid[226] = R.drawable.cross;
+        DotCorrectGrid[227] = R.drawable.cross;
+        DotCorrectGrid[234] = R.drawable.cross;
+        DotCorrectGrid[241] = R.drawable.cross;
+        DotCorrectGrid[248] = R.drawable.cross;
+        DotCorrectGrid[249] = R.drawable.cross;
+        DotCorrectGrid[253] = R.drawable.cross;
+        DotCorrectGrid[255] = R.drawable.cross;
+        DotCorrectGrid[257] = R.drawable.cross;
+        DotCorrectGrid[262] = R.drawable.cross;
+        DotCorrectGrid[266] = R.drawable.cross;
+        DotCorrectGrid[271] = R.drawable.cross;
+        DotCorrectGrid[273] = R.drawable.cross;
+        DotCorrectGrid[274] = R.drawable.cross;
+        DotCorrectGrid[275] = R.drawable.cross;
+        DotCorrectGrid[279] = R.drawable.cross;
+        DotCorrectGrid[380] = R.drawable.cross;
+        DotCorrectGrid[287] = R.drawable.cross;
+        DotCorrectGrid[288] = R.drawable.cross;
+        DotCorrectGrid[289] = R.drawable.cross;
+        DotCorrectGrid[293] = R.drawable.cross;
+        DotCorrectGrid[294] = R.drawable.cross;
+        DotCorrectGrid[301] = R.drawable.cross;
+        DotCorrectGrid[305] = R.drawable.cross;
+        DotCorrectGrid[310] = R.drawable.cross;
+        DotCorrectGrid[315] = R.drawable.cross;
+        DotCorrectGrid[316] = R.drawable.cross;
+        DotCorrectGrid[318] = R.drawable.cross;
+        DotCorrectGrid[322] = R.drawable.cross;
+        DotCorrectGrid[324] = R.drawable.cross;
+        DotCorrectGrid[330] = R.drawable.cross;
+        DotCorrectGrid[331] = R.drawable.cross;
+        DotCorrectGrid[334] = R.drawable.cross;
+        DotCorrectGrid[336] = R.drawable.cross;
+        DotCorrectGrid[338] = R.drawable.cross;
+        DotCorrectGrid[342] = R.drawable.cross;
+        DotCorrectGrid[354] = R.drawable.cross;
+        DotCorrectGrid[355] = R.drawable.cross;
+        DotCorrectGrid[359] = R.drawable.cross;
+        DotCorrectGrid[362] = R.drawable.cross;
+        DotCorrectGrid[365] = R.drawable.cross;
+        DotCorrectGrid[366] = R.drawable.cross;
+        DotCorrectGrid[372] = R.drawable.cross;
+        DotCorrectGrid[374] = R.drawable.cross;
+        DotCorrectGrid[378] = R.drawable.cross;
+        DotCorrectGrid[380] = R.drawable.cross;
+        DotCorrectGrid[381] = R.drawable.cross;
+        DotCorrectGrid[385] = R.drawable.cross;
+        DotCorrectGrid[392] = R.drawable.cross;
+        DotCorrectGrid[393] = R.drawable.cross;
+        DotCorrectGrid[397] = R.drawable.cross;
+        DotCorrectGrid[398] = R.drawable.cross;
+        DotCorrectGrid[401] = R.drawable.cross;
+        DotCorrectGrid[406] = R.drawable.cross;
+        DotCorrectGrid[408] = R.drawable.cross;
+        DotCorrectGrid[410] = R.drawable.cross;
+        DotCorrectGrid[414] = R.drawable.cross;
+        DotCorrectGrid[421] = R.drawable.cross;
+    }
 }
 
