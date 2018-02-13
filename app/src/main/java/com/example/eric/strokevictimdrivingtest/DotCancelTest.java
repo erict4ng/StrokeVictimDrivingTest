@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -23,20 +24,20 @@ public class DotCancelTest extends AppCompatActivity {
     GridView androidGridView;
     boolean[] matrix_test = new boolean[432];
     public Integer[] mThumbIds = new Integer[432];
-    public TextView timerText;
-
-    public Chronometer overtime;
-
+    public Chronometer timer;
     DotImageAdapter adapter = new DotImageAdapter(this, mThumbIds);
+    public Button nextTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dot_cancel_test);
-        timerText = findViewById(R.id.timerTxt);
-        overtime = findViewById(R.id.chrTimer);
+        //sets up next test button and sets to invisible so user cannot go to next test until they have gone through instructions
+        nextTest = findViewById(R.id.btnNexttest);
+        nextTest.setVisibility(View.INVISIBLE);
 
+        //fills array with clear images
         Arrays.fill(mThumbIds, R.drawable.clear);
         Arrays.fill(matrix_test, false);
 
@@ -51,7 +52,6 @@ public class DotCancelTest extends AppCompatActivity {
 
         androidGridView = findViewById(R.id.gridCrossGrid);
         androidGridView.setAdapter(adapter);
-
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (!matrix_test[position]) {
@@ -64,11 +64,9 @@ public class DotCancelTest extends AppCompatActivity {
                     mThumbIds[position] = R.drawable.clear;
                     Toast.makeText(DotCancelTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
                 }
-
                 adapter.notifyDataSetChanged();
             }
         });
-
     }
 
     public void hideInstructions(View view){
@@ -76,26 +74,16 @@ public class DotCancelTest extends AppCompatActivity {
                 (matrix_test[14]) && (matrix_test[15]) && (matrix_test[17]) && (matrix_test[22])){
             final TextView txtInstructions = findViewById(R.id.txtInstructions);
             txtInstructions.setVisibility(View.INVISIBLE);
-
-            new CountDownTimer(90000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
-                    time_left = millisUntilFinished / 1000;
-                }
-                public void onFinish() {
-                    overtime.setBase(SystemClock.elapsedRealtime());
-                    overtime.start();
-
-                    timerText.setText("done!");
-                }
-            }.start();
+            nextTest.setVisibility(View.VISIBLE);
+            timer.setBase(SystemClock.elapsedRealtime());
+            timer.start();
         }
     }
 
     public void startNextTest(View view){
-        long elapsedMillis = (SystemClock.elapsedRealtime() - overtime.getBase()) / 1000;
-        timerText.setText(String.valueOf(elapsedMillis));
-        overtime.stop();
+
+        long elapsedMillis = (SystemClock.elapsedRealtime() - timer.getBase()) / 1000;
+        timer.stop();
 
         Bundle bundle = getIntent().getExtras();
         bundle.putString("test1_score", "8");
