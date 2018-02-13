@@ -29,6 +29,7 @@ public class DotCancelTest extends AppCompatActivity {
     //declare misc variables
     public Button nextTest;
     public TextView textWarning;
+    public Button askConfirm;
 
     //declare scores
     public int notCrossed;
@@ -43,6 +44,7 @@ public class DotCancelTest extends AppCompatActivity {
         //sets up next test button and warning view so that it can be manipulated later
         nextTest = findViewById(R.id.btnNexttest);
         textWarning = findViewById(R.id.txtWarning);
+        askConfirm = findViewById(R.id.btnAskConfirm);
 
         //loads in the array of correct crosses
         loadanswersgrid();
@@ -77,7 +79,7 @@ public class DotCancelTest extends AppCompatActivity {
                 (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
             final TextView txtInstructions = findViewById(R.id.txtDialog);
             txtInstructions.setVisibility(View.INVISIBLE);
-            nextTest.setVisibility(View.VISIBLE);
+            askConfirm.setVisibility(View.VISIBLE);
 
             timer = new CountDownTimer(timelimit, 1000) {
                 public void onTick(long millisUntilFinished) {
@@ -127,6 +129,11 @@ public class DotCancelTest extends AppCompatActivity {
         intent.putExtras(bundle);
 
         startActivity(intent);
+    }
+
+    public void askForConfirm(View view){
+        nextTest.setVisibility(View.VISIBLE);
+        textWarning.setText("are you sure you wish to go to the next test?");
     }
 
     public void removeMe(View view){
