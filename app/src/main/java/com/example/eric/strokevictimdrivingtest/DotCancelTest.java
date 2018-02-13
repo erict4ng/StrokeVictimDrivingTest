@@ -17,6 +17,7 @@ public class DotCancelTest extends AppCompatActivity {
     long time_left;
     long time_taken;
     long timelimit = 15000;
+    CountDownTimer timer;
 
     public Integer[] DotAnswerGrid = new Integer[432];
     public Integer[] DotCorrectGrid = new Integer[432];
@@ -27,30 +28,35 @@ public class DotCancelTest extends AppCompatActivity {
 
     //declare misc variables
     public Button nextTest;
-    CountDownTimer timer;
+    public TextView textWarning;
+
+    //declare scores
     public int notCrossed;
     public int wrongCrossed;
-    public TextView textWarning;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dot_cancel_test);
-        //sets up next test button and sets to invisible so user cannot go to next test until they have gone through instructions
+        //sets up next test button and warning view so that it can be manipulated later
         nextTest = findViewById(R.id.btnNexttest);
-
         textWarning = findViewById(R.id.txtWarning);
+
+        //loads in the array of correct crosses
         loadanswersgrid();
 
-        //fills array with clear images
+        //fills answer array with clear images
         Arrays.fill(DotAnswerGrid, R.drawable.clear);
 
+        //setting example crosses up
         DotAnswerGrid[1] = R.drawable.cross;
         DotAnswerGrid[8] = R.drawable.cross;
         DotAnswerGrid[9] = R.drawable.cross;
         DotAnswerGrid[13] = R.drawable.cross;
 
+        //sets up adapter
         androidGridView = findViewById(R.id.gridCrossGrid);
         androidGridView.setAdapter(adapter);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,6 +126,11 @@ public class DotCancelTest extends AppCompatActivity {
         Intent intent = new Intent(this, DirectionsMatrixTest.class);
         intent.putExtras(bundle);
 
+        startActivity(intent);
+    }
+
+    public void removeMe(View view){
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
         startActivity(intent);
     }
 
