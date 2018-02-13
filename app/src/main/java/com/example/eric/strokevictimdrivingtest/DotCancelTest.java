@@ -2,10 +2,12 @@ package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,9 @@ public class DotCancelTest extends AppCompatActivity {
     GridView androidGridView;
     boolean[] matrix_test = new boolean[432];
     public Integer[] mThumbIds = new Integer[432];
-    TextView timerText;
+    public TextView timerText;
+
+    public Chronometer overtime;
 
     DotImageAdapter adapter = new DotImageAdapter(this, mThumbIds);
 
@@ -31,6 +35,7 @@ public class DotCancelTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dot_cancel_test);
         timerText = findViewById(R.id.timerTxt);
+        overtime = findViewById(R.id.chrTimer);
 
         Arrays.fill(mThumbIds, R.drawable.clear);
         Arrays.fill(matrix_test, false);
@@ -67,29 +72,30 @@ public class DotCancelTest extends AppCompatActivity {
     }
 
     public void hideInstructions(View view){
-        if ((matrix_test[1] == true) && (matrix_test[8] == true) && (matrix_test[9] == true) && (matrix_test[13] == true) &&
-                (matrix_test[14] == true) && (matrix_test[15] == true) && (matrix_test[17] == true) && (matrix_test[22] == true)){
+        if ((matrix_test[1]) && (matrix_test[8]) && (matrix_test[9]) && (matrix_test[13]) &&
+                (matrix_test[14]) && (matrix_test[15]) && (matrix_test[17]) && (matrix_test[22])){
             final TextView txtInstructions = findViewById(R.id.txtInstructions);
             txtInstructions.setVisibility(View.INVISIBLE);
 
-            new CountDownTimer(900000, 1000) {
+            new CountDownTimer(90000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     timerText.setText("seconds remaining: " + millisUntilFinished / 1000);
                     time_left = millisUntilFinished / 1000;
                 }
                 public void onFinish() {
+                    overtime.setBase(SystemClock.elapsedRealtime());
+                    overtime.start();
 
                     timerText.setText("done!");
                 }
             }.start();
-
         }
-
     }
 
     public void startNextTest(View view){
-
-
+        long elapsedMillis = (SystemClock.elapsedRealtime() - overtime.getBase()) / 1000;
+        timerText.setText(String.valueOf(elapsedMillis));
+        overtime.stop();
 
         Bundle bundle = getIntent().getExtras();
         bundle.putString("test1_score", "8");
