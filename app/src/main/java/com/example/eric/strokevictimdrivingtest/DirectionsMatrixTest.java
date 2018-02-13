@@ -137,6 +137,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                                 nextCard.setImageResource(R.drawable.clear);
                             }
 
+
                             if (!imageList.isEmpty()){
                                 currentCard.setImageResource(imageList.get(heldCardNo));
                                 nextCard.setImageResource(imageList.get(nextCardNo));
