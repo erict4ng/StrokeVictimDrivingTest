@@ -36,7 +36,8 @@ public class DotCancelTest extends AppCompatActivity {
     public Button nextTest;
     public TextView txtTime;
     CountDownTimer timer;
-    public int score;
+    public int notCrossed;
+    public int wrongCrossed;
 
 
 
@@ -98,22 +99,23 @@ public class DotCancelTest extends AppCompatActivity {
     public void startNextTest(View view){
 
         loadanswersgrid();
-
         time_taken = (timelimit / 1000) - time_left;
         txtTime.setText("taken: " + time_taken);
         timer.cancel();
 
-        for (int i=0; i <DotAnswerGrid.length; i++){
-            if (DotAnswerGrid[i].equals(DotCorrectGrid[i])){
-                score += 1;
+        for (int i=23; i <DotAnswerGrid.length; i++){
+            if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+                notCrossed += 1;
+            }
+            if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+                wrongCrossed += 1;
             }
         }
 
-        txtTime.setText("score " + score);
-
         Bundle bundle = getIntent().getExtras();
-        bundle.putString("test1_score", "8");
-        bundle.putString("test1_time",String.valueOf(time_left));
+        bundle.putLong("Dot_time", time_taken);
+        bundle.putLong("Dot_missedCrosses", notCrossed);
+        bundle.putLong("Dot_wrongCrosses", wrongCrossed);
 
         Intent intent = new Intent(this, DirectionsMatrixTest.class);
         intent.putExtras(bundle);
@@ -122,6 +124,7 @@ public class DotCancelTest extends AppCompatActivity {
     }
 
     public void loadanswersgrid() {
+        Arrays.fill(DotCorrectGrid, R.drawable.clear);
         DotCorrectGrid[26] = R.drawable.cross;
         DotCorrectGrid[31] = R.drawable.cross;
         DotCorrectGrid[33] = R.drawable.cross;
