@@ -20,7 +20,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
 
     long time_left;
     GridView androidGridView;
-    boolean[] matrix_test = new boolean[15];
+    boolean[] matrix_test = new boolean[16];
     public Integer[] mThumbIds = new Integer[16];
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, mThumbIds);
@@ -30,12 +30,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_matrix_test);
-
-        //ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
-        //ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
-
-        //nextCard.setImageResource(R.drawable.bothAway);
-        //currentCard.setImageResource(R.drawable.test2Example);
 
         Arrays.fill(mThumbIds, R.drawable.car_east_southeast);
         Arrays.fill(matrix_test, false);
@@ -67,7 +61,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (!matrix_test[position]) {
                     matrix_test[position] = true;
-                    mThumbIds[position] = heldCardNo;
+                    mThumbIds[position] = imageList.get(heldCardNo - 1);
                     Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
                 }
                 else if(matrix_test[position]) {
