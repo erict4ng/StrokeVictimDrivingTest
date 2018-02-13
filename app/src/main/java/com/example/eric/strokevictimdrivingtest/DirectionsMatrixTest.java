@@ -38,22 +38,32 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         Arrays.fill(directionsAnswerGrid, R.drawable.car_east_southeast);
         Arrays.fill(matrix_test, false);
 
+        imageList.add(R.drawable.directions_example);
 
         imageList.add(R.drawable.both_away);
         imageList.add(R.drawable.both_front);
         imageList.add(R.drawable.both_right);
+
+        imageList.add(R.drawable.both_left);
+
         imageList.add(R.drawable.left_lorry_right_car);
+
         imageList.add(R.drawable.lorry_away_car_forward);
         imageList.add(R.drawable.lorry_away_car_left);
         imageList.add(R.drawable.lorry_away_car_right);
+
         imageList.add(R.drawable.lorry_forward_car_away);
         imageList.add(R.drawable.lorry_forward_car_left);
         imageList.add(R.drawable.lorry_forward_car_right);
+
         imageList.add(R.drawable.lorry_left_car_away);
+
         imageList.add(R.drawable.lorry_left_car_forward);
-        imageList.add(R.drawable.both_left);
+
         imageList.add(R.drawable.lorry_right_car_forward);
         imageList.add(R.drawable.lorry_right_car_left);
+
+
 
 
         androidGridView = findViewById(R.id.directionsBoardGrid);
@@ -78,9 +88,17 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 }
                 else if(!firstClick)
                 {
+//                    if (imageList.size() == 2) {
+//                        heldCardNo = 0;
+//                        nextCardNo = 1;
+//                    }
+//
+//                    if (imageList.size() == 1) {
+//                        heldCardNo = 1;
+//                        currentCard.setImageResource(imageList.get(heldCardNo));
+//                        nextCard.setImageResource(R.drawable.clear);
+//                    }
 
-                    if (!matrix_test[position])
-                    {
                         if (directionsAnswerGrid[position] != R.drawable.clear)
                         {
                             Integer temp = directionsAnswerGrid[position];
@@ -94,30 +112,49 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             imageList.remove(heldCardNo);
                             heldCardNo = nextCardNo;
 
-                            if (heldCardNo == (imageList.size() - 1))
-                            {
-                                nextCardNo = 0;
+                            if (heldCardNo == imageList.size()){
+                                heldCardNo = 0;
+                                nextCardNo = 1;
                             }
+//                             else if (heldCardNo == imageList.size())
+//                            {
+//                                nextCardNo = 1;
+//                            }
                             else
                             {
                                 nextCardNo = heldCardNo + 1;
                             }
 
-                            currentCard.setImageResource(imageList.get(heldCardNo));
-                            nextCard.setImageResource(imageList.get(nextCardNo));
+                            if (imageList.size() == 2) {
+                                heldCardNo = 0;
+                                nextCardNo = 1;
+                            }
+
+                            if (imageList.size() == 1) {
+                                heldCardNo = 0;
+                                nextCardNo = 0;
+                                currentCard.setImageResource(imageList.get(heldCardNo));
+                                nextCard.setImageResource(R.drawable.clear);
+                            }
+
+                            if (imageList.size() == 0) {
+                                heldCardNo = 0;
+                                nextCardNo = 0;
+                                currentCard.setImageResource(imageList.get(heldCardNo));
+                                nextCard.setImageResource(R.drawable.clear);
+                            }
+
+                            if (imageList.size() != 0){
+                                currentCard.setImageResource(imageList.get(heldCardNo));
+                                nextCard.setImageResource(imageList.get(nextCardNo));
+                            } else {
+                                currentCard.setImageResource(R.drawable.clear);
+                                nextCard.setImageResource(R.drawable.clear);
+                            }
                         }
 
 
                         Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
-
-                    }
-                    else if (matrix_test[position])
-                    {
-
-                        directionsAnswerGrid[position] = R.drawable.clear;
-                        Toast.makeText(DirectionsMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
-
-                    }
 
                 }
 
@@ -128,45 +165,56 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     }
 
     public void startTest(View view){
-        Arrays.fill(directionsAnswerGrid, R.drawable.clear);
-        adapter.notifyDataSetChanged();
+        if( firstClick){
+            Toast.makeText(DirectionsMatrixTest.this, "Please place the example image!" , Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Arrays.fill(directionsAnswerGrid, R.drawable.clear);
+            adapter.notifyDataSetChanged();
 
-        TextView instructions = (TextView) findViewById(R.id.instructionsTest);
-        Button startTest = (Button) findViewById(R.id.startButton);
+            TextView instructions = (TextView) findViewById(R.id.instructionsTest);
+            Button startTest = (Button) findViewById(R.id.startButton);
 
-        instructions.setVisibility(View.INVISIBLE);
-        startTest.setVisibility(View.INVISIBLE);
+            instructions.setVisibility(View.INVISIBLE);
+            startTest.setVisibility(View.INVISIBLE);
+        }
     }
+
 
     //onClick to add to the stack of card images
     public void getNextCard(View view){
         ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
         ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
 
-        if (heldCardNo < (imageList.size() - 1))
-        {
-            heldCardNo = nextCardNo;
+//        if (imageList.size() == 1){
+//                heldCardNo = 1;
+//                currentCard.setImageResource(imageList.get(heldCardNo));
+//                nextCard.setImageResource(R.drawable.clear);
+//        } else {
+            if (heldCardNo < (imageList.size() - 1)) {
+                heldCardNo = nextCardNo;
+            } else {
+                heldCardNo = 0;
+            }
+
+
+            if (heldCardNo == (imageList.size() - 1)) {
+                nextCardNo = 0;
+            } else {
+                nextCardNo = heldCardNo + 1;
+            }
+
+//            if (imageList.size() == 2) {
+//                heldCardNo = 0;
+//                nextCardNo = 1;
+//            }
+
+            currentCard.setImageResource(imageList.get(heldCardNo));
+            nextCard.setImageResource(imageList.get(nextCardNo));
         }
-        else
-        {
-            heldCardNo = 0;
-        }
 
-
-        if (heldCardNo == (imageList.size() - 1))
-        {
-            nextCardNo = 0;
-        }
-        else
-        {
-            nextCardNo = heldCardNo + 1;
-        }
-
-
-        currentCard.setImageResource(imageList.get(heldCardNo));
-        nextCard.setImageResource(imageList.get(nextCardNo));
-
-    }
+   // }
 
 
     public void startNextTest(View view){
