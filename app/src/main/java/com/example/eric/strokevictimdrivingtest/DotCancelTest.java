@@ -183,38 +183,44 @@ public class DotCancelTest extends AppCompatActivity {
         androidGridView.setAdapter(adapter);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                //toggles crossed or not crossed
                 if (DotAnswerGrid[position] == R.drawable.clear) {
                     DotAnswerGrid[position] = R.drawable.cross;
                 }
                 else if(DotAnswerGrid[position] != R.drawable.clear) {
                     DotAnswerGrid[position] = R.drawable.clear;
                 }
+                //updates the grid
                 adapter.notifyDataSetChanged();
             }
         });
     }
 
+    //when the user chooses to start the test
     public void hideInstructions(View view){
+        //tests if the correct dots are crossed
         if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
                 (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
             final TextView txtInstructions = findViewById(R.id.txtDialog);
             txtInstructions.setVisibility(View.INVISIBLE);
             askConfirm.setVisibility(View.VISIBLE);
-
+            //stars the timer
             timer = new CountDownTimer(timelimit, 1000) {
                 public void onTick(long millisUntilFinished) {
+                    //updates the time left every second
                     time_left = millisUntilFinished / 1000;
                 }
                 public void onFinish() {
                     time_left = 0;
-
+                    //tells the user that the time is up
                     textWarning.setText("That’s fine, you have done enough now and can stop.");
-
-
+                    //records the scores
                     for (int i=23; i <DotAnswerGrid.length; i++){
+                        //records the correct dots that the user missed
                         if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
                             notCrossed += 1;
                         }
+                        //records the dots that the user crossed that were incorrect
                         if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
                             wrongCrossed += 1;
                         }
@@ -227,10 +233,13 @@ public class DotCancelTest extends AppCompatActivity {
         }
     }
 
+    //when the user comfirms that they are done with the test
     public void startNextTest(View view){
+        //records that time taken in seconds
         time_taken = (timelimit / 1000) - time_left;
         timer.cancel();
 
+        //records the results if the user finishes before the itmer ends
         if(time_taken * 1000 != timelimit){
             for (int i=23; i <DotAnswerGrid.length; i++){
                 if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
@@ -242,6 +251,7 @@ public class DotCancelTest extends AppCompatActivity {
             }
         }
 
+        //puts results inside of the scores bundle
         Bundle bundle = getIntent().getExtras();
         bundle.putLong("Dot_time", time_taken);
         bundle.putLong("Dot_missedCrosses", notCrossed);
@@ -253,6 +263,7 @@ public class DotCancelTest extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //asks the user to confirm that they are done with the test
     public void askForConfirm(View view){
         nextTest.setVisibility(View.VISIBLE);
         textWarning.setText("are you sure you wish to go to the next test?");
