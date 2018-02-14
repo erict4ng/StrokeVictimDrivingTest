@@ -16,7 +16,7 @@ public class DotCancelTest extends AppCompatActivity {
     //declare timer variables
     long time_left;
     long time_taken;
-    long timelimit = 15000;
+    long timelimit = 90000;
     CountDownTimer timer;
 
     public Integer[] DotAnswerGrid = new Integer[432];
@@ -208,6 +208,9 @@ public class DotCancelTest extends AppCompatActivity {
                 public void onFinish() {
                     time_left = 0;
 
+                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+
+
                     for (int i=23; i <DotAnswerGrid.length; i++){
                         if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
                             notCrossed += 1;
@@ -226,7 +229,6 @@ public class DotCancelTest extends AppCompatActivity {
 
     public void startNextTest(View view){
         time_taken = (timelimit / 1000) - time_left;
-
         timer.cancel();
 
         if(time_taken * 1000 != timelimit){
