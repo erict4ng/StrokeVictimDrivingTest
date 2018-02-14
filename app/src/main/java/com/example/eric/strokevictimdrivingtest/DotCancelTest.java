@@ -47,101 +47,6 @@ public class DotCancelTest extends AppCompatActivity {
         askConfirm = findViewById(R.id.btnAskConfirm);
 
         //loads in the array of correct crosses
-        loadanswersgrid();
-
-        //fills answer array with clear images
-        Arrays.fill(DotAnswerGrid, R.drawable.clear);
-
-        //setting example crosses up
-        DotAnswerGrid[1] = R.drawable.cross;
-        DotAnswerGrid[8] = R.drawable.cross;
-        DotAnswerGrid[9] = R.drawable.cross;
-        DotAnswerGrid[13] = R.drawable.cross;
-
-        //sets up adapter
-        androidGridView = findViewById(R.id.gridCrossGrid);
-        androidGridView.setAdapter(adapter);
-        androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                if (DotAnswerGrid[position] == R.drawable.clear) {
-                    DotAnswerGrid[position] = R.drawable.cross;
-                }
-                else if(DotAnswerGrid[position] != R.drawable.clear) {
-                    DotAnswerGrid[position] = R.drawable.clear;
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    public void hideInstructions(View view){
-        if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
-                (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
-            final TextView txtInstructions = findViewById(R.id.txtDialog);
-            txtInstructions.setVisibility(View.INVISIBLE);
-            askConfirm.setVisibility(View.VISIBLE);
-
-            timer = new CountDownTimer(timelimit, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    time_left = millisUntilFinished / 1000;
-                }
-                public void onFinish() {
-                    time_left = 0;
-
-                    for (int i=23; i <DotAnswerGrid.length; i++){
-                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
-                            notCrossed += 1;
-                        }
-                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
-                            wrongCrossed += 1;
-                        }
-                    }
-                }
-            }.start();
-            textWarning.setText("");
-        }else{
-            textWarning.setText(R.string.instructionswrong);
-        }
-    }
-
-    public void startNextTest(View view){
-        time_taken = (timelimit / 1000) - time_left;
-
-        timer.cancel();
-
-        if(time_taken * 1000 != timelimit){
-            for (int i=23; i <DotAnswerGrid.length; i++){
-                if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
-                    notCrossed += 1;
-                }
-                if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
-                    wrongCrossed += 1;
-                }
-            }
-        }
-
-        Bundle bundle = getIntent().getExtras();
-        bundle.putLong("Dot_time", time_taken);
-        bundle.putLong("Dot_missedCrosses", notCrossed);
-        bundle.putLong("Dot_wrongCrosses", wrongCrossed);
-
-        Intent intent = new Intent(this, DirectionsMatrixTest.class);
-        intent.putExtras(bundle);
-
-        startActivity(intent);
-    }
-
-    public void askForConfirm(View view){
-        nextTest.setVisibility(View.VISIBLE);
-        textWarning.setText("are you sure you wish to go to the next test?");
-    }
-
-    public void removeMe(View view){
-        Intent intent = new Intent(this, DirectionsMatrixTest.class);
-        startActivity(intent);
-    }
-
-    public void loadanswersgrid() {
         Arrays.fill(DotCorrectGrid, R.drawable.clear);
         DotCorrectGrid[26] = R.drawable.cross;
         DotCorrectGrid[31] = R.drawable.cross;
@@ -263,6 +168,98 @@ public class DotCancelTest extends AppCompatActivity {
         DotCorrectGrid[410] = R.drawable.cross;
         DotCorrectGrid[414] = R.drawable.cross;
         DotCorrectGrid[421] = R.drawable.cross;
+
+        //fills answer array with clear images
+        Arrays.fill(DotAnswerGrid, R.drawable.clear);
+
+        //setting example crosses up
+        DotAnswerGrid[1] = R.drawable.cross;
+        DotAnswerGrid[8] = R.drawable.cross;
+        DotAnswerGrid[9] = R.drawable.cross;
+        DotAnswerGrid[13] = R.drawable.cross;
+
+        //sets up adapter
+        androidGridView = findViewById(R.id.gridCrossGrid);
+        androidGridView.setAdapter(adapter);
+        androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                if (DotAnswerGrid[position] == R.drawable.clear) {
+                    DotAnswerGrid[position] = R.drawable.cross;
+                }
+                else if(DotAnswerGrid[position] != R.drawable.clear) {
+                    DotAnswerGrid[position] = R.drawable.clear;
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
+
+    public void hideInstructions(View view){
+        if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
+                (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
+            final TextView txtInstructions = findViewById(R.id.txtDialog);
+            txtInstructions.setVisibility(View.INVISIBLE);
+            askConfirm.setVisibility(View.VISIBLE);
+
+            timer = new CountDownTimer(timelimit, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    time_left = millisUntilFinished / 1000;
+                }
+                public void onFinish() {
+                    time_left = 0;
+
+                    for (int i=23; i <DotAnswerGrid.length; i++){
+                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+                            notCrossed += 1;
+                        }
+                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+                            wrongCrossed += 1;
+                        }
+                    }
+                }
+            }.start();
+            textWarning.setText("");
+        }else{
+            textWarning.setText(R.string.instructionswrong);
+        }
+    }
+
+    public void startNextTest(View view){
+        time_taken = (timelimit / 1000) - time_left;
+
+        timer.cancel();
+
+        if(time_taken * 1000 != timelimit){
+            for (int i=23; i <DotAnswerGrid.length; i++){
+                if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+                    notCrossed += 1;
+                }
+                if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+                    wrongCrossed += 1;
+                }
+            }
+        }
+
+        Bundle bundle = getIntent().getExtras();
+        bundle.putLong("Dot_time", time_taken);
+        bundle.putLong("Dot_missedCrosses", notCrossed);
+        bundle.putLong("Dot_wrongCrosses", wrongCrossed);
+
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
+    public void askForConfirm(View view){
+        nextTest.setVisibility(View.VISIBLE);
+        textWarning.setText("are you sure you wish to go to the next test?");
+    }
+
+    public void removeMe(View view){
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        startActivity(intent);
+    }
+
 }
 

@@ -37,26 +37,19 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         Arrays.fill(directionsAnswerGrid, R.drawable.clear);
 
         imageList.add(R.drawable.directions_example);
-
         imageList.add(R.drawable.both_away);
         imageList.add(R.drawable.both_front);
         imageList.add(R.drawable.both_right);
-
         imageList.add(R.drawable.both_left);
-
         imageList.add(R.drawable.left_lorry_right_car);
-
         imageList.add(R.drawable.lorry_away_car_forward);
         imageList.add(R.drawable.lorry_away_car_left);
         imageList.add(R.drawable.lorry_away_car_right);
-
         imageList.add(R.drawable.lorry_forward_car_away);
         imageList.add(R.drawable.lorry_forward_car_left);
         imageList.add(R.drawable.lorry_forward_car_right);
-
         imageList.add(R.drawable.lorry_left_car_away);
         imageList.add(R.drawable.lorry_left_car_forward);
-
         imageList.add(R.drawable.lorry_right_car_forward);
         imageList.add(R.drawable.lorry_right_car_left);
 
@@ -69,7 +62,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
 
-                if(!firstClick) {
                     if (directionsAnswerGrid[position] != R.drawable.clear)
                     {
                         Integer temp = directionsAnswerGrid[position];
@@ -87,9 +79,13 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             heldCardNo = 0;
                             nextCardNo = 1;
                         }
-                        else
-                        {
+                        else {
                             nextCardNo = heldCardNo + 1;
+                        }
+
+                        if(firstClick){
+                            androidGridView.setEnabled(false);
+                            firstClick = false;
                         }
 
                         if (imageList.size() == 1) {
@@ -106,16 +102,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             nextCard.setImageResource(R.drawable.clear);
                         }
                     }
-                }
-                else if(firstClick) {
-                    directionsAnswerGrid[position] = R.drawable.directions_example;
-                    currentCard.setImageResource(imageList.get(heldCardNo));
-                    nextCard.setImageResource(imageList.get(nextCardNo));
-                    androidGridView.setEnabled(false);
-                    firstClick = false;
-
-                }
-
                 adapter.notifyDataSetChanged();
             }
         });
@@ -124,7 +110,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(DirectionsMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
-
                 return true;
             }
         });
@@ -153,35 +138,34 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         ImageView nextCard = findViewById(R.id.nextCard);
         ImageView currentCard = findViewById(R.id.heldCard);
 
-//        if (imageList.size() == 1){
-//                heldCardNo = 1;
-//                currentCard.setImageResource(imageList.get(heldCardNo));
-//                nextCard.setImageResource(R.drawable.clear);
-//        } else {
+        if (imageList.size() == 1){
+                heldCardNo = 0;
+                currentCard.setImageResource(imageList.get(heldCardNo));
+                nextCard.setImageResource(R.drawable.clear);
+        } else {
 
-            if (heldCardNo < (imageList.size() - 1)) {
+            if (heldCardNo < (imageList.size())) {
                 heldCardNo = nextCardNo;
             } else {
                 heldCardNo = 0;
             }
 
-
-            if (heldCardNo == (imageList.size() - 1)) {
+            if (heldCardNo == (imageList.size())) {
                 nextCardNo = 0;
             } else {
                 nextCardNo = heldCardNo + 1;
             }
 
-//            if (imageList.size() == 2) {
-//                heldCardNo = 0;
-//                nextCardNo = 1;
-//            }
+            if (imageList.size() == 2) {
+                heldCardNo = 0;
+                nextCardNo = 1;
+            }
 
             currentCard.setImageResource(imageList.get(heldCardNo));
             nextCard.setImageResource(imageList.get(nextCardNo));
         }
 
-   // }
+    }
 
 
     public void startNextTest(View view){
