@@ -84,4 +84,7 @@
 out a group of 3 dots but the task is to cross out all the groups of 4 dots </string>
 
     <string name="directioninstructions"> The large arrows correspond to the lorries and the small arrows to the cars. Each arrow indicates a direction of travel. I want you to position these cards (indicate the car/lorry cards) so that each car is travelling in the direction indicated by the small arrow and each lorry in the direction indicated by the large arrow. I will do the first one as an example</string>
+
+
+
 </resources>

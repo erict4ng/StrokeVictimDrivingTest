@@ -34,7 +34,8 @@
                 android:value="com.example.eric.strokevictimdrivingtest.Login" />
         </activity>
         <activity android:name=".DirectionsMatrixTest" />
-        <activity android:name=".CompassMatrixTest"></activity>
+        <activity android:name=".CompassMatrixTest" />
+        <activity android:name=".endPage"></activity>
     </application>
 
 </manifest>
