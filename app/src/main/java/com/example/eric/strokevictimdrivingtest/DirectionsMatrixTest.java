@@ -62,28 +62,53 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
 
-                    if (directionsAnswerGrid[position] != R.drawable.clear)
-                    {
+                if (!imageList.isEmpty()) {
+                    if (directionsAnswerGrid[position] != R.drawable.clear) {
                         Integer temp = directionsAnswerGrid[position];
                         directionsAnswerGrid[position] = imageList.get(heldCardNo);
                         imageList.set(heldCardNo, temp);
                         currentCard.setImageResource(imageList.get(heldCardNo));
-                    }
-                    else
-                    {
+                    } else {
                         directionsAnswerGrid[position] = imageList.get(heldCardNo);
                         imageList.remove(heldCardNo);
                         heldCardNo = nextCardNo;
 
-                        if (heldCardNo == imageList.size()){
-                            heldCardNo = 0;
-                            nextCardNo = 1;
-                        }
-                        else {
-                            nextCardNo = heldCardNo + 1;
+                        nextCardNo += 1;
+
+                        if (nextCardNo == imageList.size() - 1) {
+                            nextCardNo = 0;
                         }
 
-                        if(firstClick){
+
+
+//                        if (heldCardNo == imageList.size() - 1){
+//                            heldCardNo = 0;
+//                            nextCardNo = 1;
+//                        }
+//                        else if (nextCardNo == imageList.size() - 1){
+//                            //heldCardNo += 1;
+//                            nextCardNo = 0;
+//                        }
+//                        else {
+//                            //heldCardNo += 1;
+//                            nextCardNo = heldCardNo + 1;
+//                        }
+
+//                        if (heldCardNo == imageList.size() - 1)
+//                        {
+//                            heldCardNo = 0;
+//                            nextCardNo = 1;
+//                        }
+//                        else if (nextCardNo == imageList.size() - 1) {
+//                            heldCardNo += 1;
+//                            nextCardNo = 0;
+//                        }
+//                        else
+//                        {
+//                            nextCardNo = heldCardNo + 1;
+//                        }
+
+                        if (firstClick) {
                             androidGridView.setEnabled(false);
                             firstClick = false;
                         }
@@ -93,8 +118,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             nextCardNo = 0;
                             currentCard.setImageResource(imageList.get(heldCardNo));
                             nextCard.setImageResource(R.drawable.clear);
-                        }
-                        else if (!imageList.isEmpty()){
+                        } else if (!imageList.isEmpty()) {
                             currentCard.setImageResource(imageList.get(heldCardNo));
                             nextCard.setImageResource(imageList.get(nextCardNo));
                         } else {
@@ -102,6 +126,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             nextCard.setImageResource(R.drawable.clear);
                         }
                     }
+                }
                 adapter.notifyDataSetChanged();
             }
         });
@@ -110,6 +135,8 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(DirectionsMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
+
+
                 return true;
             }
         });
@@ -144,22 +171,35 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 nextCard.setImageResource(R.drawable.clear);
         } else {
 
-            if (heldCardNo < (imageList.size())) {
-                heldCardNo = nextCardNo;
-            } else {
-                heldCardNo = 0;
-            }
-
-            if (heldCardNo == (imageList.size())) {
-                nextCardNo = 0;
-            } else {
-                nextCardNo = heldCardNo + 1;
-            }
-
-            if (imageList.size() == 2) {
+            if (heldCardNo == imageList.size() - 1){
                 heldCardNo = 0;
                 nextCardNo = 1;
             }
+            else if (nextCardNo == imageList.size() - 1){
+                heldCardNo += 1;
+                nextCardNo = 0;
+            }
+            else {
+                heldCardNo += 1;
+                nextCardNo = heldCardNo + 1;
+            }
+
+//            if (heldCardNo < (imageList.size() - 1)) {
+//                heldCardNo = nextCardNo;
+//            } else {
+//                heldCardNo = 0;
+//            }
+//
+//            if (nextCardNo == (imageList.size() - 1)) {
+//                nextCardNo = 0;
+//            } else {
+//                nextCardNo = heldCardNo + 1;
+//            }
+//
+//            if (imageList.size() == 2) {
+//                heldCardNo = 0;
+//                nextCardNo = 1;
+//            }
 
             currentCard.setImageResource(imageList.get(heldCardNo));
             nextCard.setImageResource(imageList.get(nextCardNo));
