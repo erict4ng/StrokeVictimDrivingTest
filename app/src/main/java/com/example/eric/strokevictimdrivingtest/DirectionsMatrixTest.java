@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DirectionsMatrixTest extends AppCompatActivity {
-    List<Integer> imageList = new ArrayList<Integer>();
+    List<Integer> imageList = new ArrayList<>();
 
     int heldCardNo = 0;
     int nextCardNo = 1;
@@ -109,9 +109,9 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 }
                 else if(firstClick) {
                     directionsAnswerGrid[position] = R.drawable.directions_example;
-
                     currentCard.setImageResource(imageList.get(heldCardNo));
                     nextCard.setImageResource(imageList.get(nextCardNo));
+                    androidGridView.setEnabled(false);
                     firstClick = false;
 
                 }
@@ -120,16 +120,24 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             }
         });
 
+        androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(DirectionsMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
+
     }
 
     public void startTest(View view){
-        if( firstClick){
+        if(firstClick){
             Toast.makeText(DirectionsMatrixTest.this, "Please place the example image!" , Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Arrays.fill(directionsAnswerGrid, R.drawable.clear);
-            adapter.notifyDataSetChanged();
+            androidGridView.setEnabled(true);
 
             TextView instructions = findViewById(R.id.instructionsTest);
             Button startTest = findViewById(R.id.startButton);
