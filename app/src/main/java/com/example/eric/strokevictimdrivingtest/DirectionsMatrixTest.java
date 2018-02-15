@@ -71,12 +71,13 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                     } else {
                         directionsAnswerGrid[position] = imageList.get(heldCardNo);
                         imageList.remove(heldCardNo);
-                        heldCardNo = nextCardNo;
+                        //heldCardNo = nextCardNo;
 
-                        nextCardNo += 1;
+                        //nextCardNo += 1;
 
-                        if (nextCardNo == imageList.size() - 1) {
-                            nextCardNo = 0;
+                        if (heldCardNo == imageList.size() - 1) {
+                            heldCardNo = 0;
+                            nextCardNo = 1;
                         }
 
 
@@ -136,6 +137,26 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(DirectionsMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
 
+                ImageView nextCard = findViewById(R.id.nextCard);
+                ImageView currentCard = findViewById(R.id.heldCard);
+
+                imageList.add(directionsAnswerGrid[position]);
+
+                if (imageList.size() == 1){
+                    currentCard.setImageResource(imageList.get(0));
+                    nextCard.setImageResource(R.drawable.clear);
+                    heldCardNo = 0;
+                    nextCardNo = 0;
+                }
+
+                if (imageList.size() == 2){
+                    nextCard.setImageResource(imageList.get(1));
+                    heldCardNo = 0;
+                    nextCardNo = 1;
+                }
+
+                directionsAnswerGrid[position] = R.drawable.clear;
+                adapter.notifyDataSetChanged();
 
                 return true;
             }
@@ -161,28 +182,29 @@ public class DirectionsMatrixTest extends AppCompatActivity {
 
 
     //onClick to add to the stack of card images
-    public void getNextCard(View view){
+    public void getNextCard(View view) {
         ImageView nextCard = findViewById(R.id.nextCard);
         ImageView currentCard = findViewById(R.id.heldCard);
 
-        if (imageList.size() == 1){
+        if (!imageList.isEmpty()) {
+            if (imageList.size() == 1) {
                 heldCardNo = 0;
                 currentCard.setImageResource(imageList.get(heldCardNo));
                 nextCard.setImageResource(R.drawable.clear);
-        } else {
+            } else {
 
-            if (heldCardNo == imageList.size() - 1){
-                heldCardNo = 0;
-                nextCardNo = 1;
-            }
-            else if (nextCardNo == imageList.size() - 1){
-                heldCardNo += 1;
-                nextCardNo = 0;
-            }
-            else {
-                heldCardNo += 1;
-                nextCardNo = heldCardNo + 1;
-            }
+
+                if (heldCardNo == imageList.size() - 1) {
+                    heldCardNo = 0;
+                    nextCardNo = 1;
+                } else if (nextCardNo == imageList.size() - 1) {
+                    heldCardNo += 1;
+                    nextCardNo = 0;
+                } else {
+                    heldCardNo += 1;
+                    nextCardNo = heldCardNo + 1;
+                }
+
 
 //            if (heldCardNo < (imageList.size() - 1)) {
 //                heldCardNo = nextCardNo;
@@ -201,10 +223,11 @@ public class DirectionsMatrixTest extends AppCompatActivity {
 //                nextCardNo = 1;
 //            }
 
-            currentCard.setImageResource(imageList.get(heldCardNo));
-            nextCard.setImageResource(imageList.get(nextCardNo));
-        }
+                currentCard.setImageResource(imageList.get(heldCardNo));
+                nextCard.setImageResource(imageList.get(nextCardNo));
+            }
 
+        }
     }
 
 
@@ -213,12 +236,12 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         //timerText.setText(String.valueOf(elapsedMillis));
         //overtime.stop();
 
-        Bundle bundle = getIntent().getExtras();
-        bundle.putString("test1_score", "8");
+        //Bundle bundle = getIntent().getExtras();
+        //bundle.putString("test1_score", "8");
         //bundle.putString("test1_time",String.valueOf(time_left));
 
         Intent intent = new Intent(this, CompassMatrixTest.class);
-        intent.putExtras(bundle);
+        //intent.putExtras(bundle);
 
         startActivity(intent);
     }

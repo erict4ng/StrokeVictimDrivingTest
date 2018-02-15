@@ -13,10 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CompassMatrixTest extends AppCompatActivity {
-    List<Integer> imageList = new ArrayList<Integer>();
+    List<Integer> image_list = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
-    Boolean firstClick = true;
+    //Boolean firstClick = true;
 
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
@@ -29,45 +29,44 @@ public class CompassMatrixTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass_matrix_test);
 
-        Arrays.fill(compassAnswerGrid, R.drawable.car_east_southeast);
+        Arrays.fill(compassAnswerGrid, R.drawable.square);
         Arrays.fill(matrix_test, false);
 
 
-        imageList.add(R.drawable.car_east_northeast);
-        imageList.add(R.drawable.car_east_northwest);
-        imageList.add(R.drawable.car_east_southeast);
-        imageList.add(R.drawable.car_east_southwest);
-        imageList.add(R.drawable.car_eastwest);
+        image_list.add(R.drawable.car_east_northeast);
+        image_list.add(R.drawable.car_east_northwest);
+        image_list.add(R.drawable.car_east_southeast);
+        image_list.add(R.drawable.car_east_southwest);
+        image_list.add(R.drawable.car_eastwest);
 
-        imageList.add(R.drawable.car_north_northeast);
-        imageList.add(R.drawable.car_north_northwest);
-        imageList.add(R.drawable.car_north_southeast);
-        imageList.add(R.drawable.car_north_southwest);
-        imageList.add(R.drawable.car_north_west);
+        image_list.add(R.drawable.car_north_northeast);
+        image_list.add(R.drawable.car_north_northwest);
+        image_list.add(R.drawable.car_north_southeast);
+        image_list.add(R.drawable.car_north_southwest);
+        image_list.add(R.drawable.car_north_west);
 
-        imageList.add(R.drawable.car_northeast);
-        imageList.add(R.drawable.car_northeast_northwest);
-        imageList.add(R.drawable.car_northeast_southwest);
-        imageList.add(R.drawable.car_northeast_southeast);
-        imageList.add(R.drawable.car_northsouth);
+        image_list.add(R.drawable.car_northeast);
+        image_list.add(R.drawable.car_northeast_northwest);
+        image_list.add(R.drawable.car_northeast_southwest);
+        image_list.add(R.drawable.car_northeast_southeast);
+        image_list.add(R.drawable.car_northsouth);
 
-        imageList.add(R.drawable.car_northwest_southeast);
-        imageList.add(R.drawable.car_northwest_southwest);
+        image_list.add(R.drawable.car_northwest_southeast);
+        image_list.add(R.drawable.car_northwest_southwest);
 
-        imageList.add(R.drawable.car_south_east);
-        imageList.add(R.drawable.car_south_northeast);
-        imageList.add(R.drawable.car_south_northwest);
-        imageList.add(R.drawable.car_south_southeast);
-        imageList.add(R.drawable.car_south_southwest);
+        image_list.add(R.drawable.car_south_east);
+        image_list.add(R.drawable.car_south_northeast);
+        image_list.add(R.drawable.car_south_northwest);
+        image_list.add(R.drawable.car_south_southeast);
+        image_list.add(R.drawable.car_south_southwest);
 
-        imageList.add(R.drawable.car_southeast_southwest);
-        imageList.add(R.drawable.car_southwest);
+        image_list.add(R.drawable.car_southeast_southwest);
+        image_list.add(R.drawable.car_southwest);
 
-        imageList.add(R.drawable.car_west_northeast);
-        imageList.add(R.drawable.car_west_northwest);
-        imageList.add(R.drawable.car_west_southeast);
-        imageList.add(R.drawable.car_west_southwest);
-        //imageList.add(R.drawable.directions_example);
+        image_list.add(R.drawable.car_west_northeast);
+        image_list.add(R.drawable.car_west_northwest);
+        image_list.add(R.drawable.car_west_southeast);
+        image_list.add(R.drawable.car_west_southwest);
 
 
         androidGridView = findViewById(R.id.compassGrid);
@@ -78,58 +77,129 @@ public class CompassMatrixTest extends AppCompatActivity {
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                if (firstClick){
-                    compassAnswerGrid[position] = R.drawable.directions_example;
-                    ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
-                    ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
+                ImageView nextCard = findViewById(R.id.nextCard);
+                ImageView currentCard = findViewById(R.id.heldCard);
 
-                    currentCard.setImageResource(imageList.get(heldCardNo));
-                    nextCard.setImageResource(imageList.get(nextCardNo));
-                    firstClick = false;
+                if (!image_list.isEmpty()) {
+                    if (compassAnswerGrid[position] != R.drawable.square) {
+                        Integer temp = compassAnswerGrid[position];
+                        compassAnswerGrid[position] = image_list.get(heldCardNo);
+                        image_list.set(heldCardNo, temp);
+                        currentCard.setImageResource(image_list.get(heldCardNo));
+                    } else {
+                        compassAnswerGrid[position] = image_list.get(heldCardNo);
+                        image_list.remove(heldCardNo);
 
-                } else if(!firstClick) {
-                    if (!matrix_test[position]) {
-                        //matrix_test[position] = true;
-                        compassAnswerGrid[position] = imageList.get(heldCardNo);
-                        Toast.makeText(CompassMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
-                    } else if (matrix_test[position]) {
-                        //matrix_test[position] = false;
-                        compassAnswerGrid[position] = R.drawable.clear;
-                        Toast.makeText(CompassMatrixTest.this, "" + matrix_test[position], Toast.LENGTH_SHORT).show();
+
+                        if (heldCardNo == image_list.size() - 1) {
+                            heldCardNo = 0;
+                            nextCardNo = 1;
+                        }
+
+
+//                        if (firstClick) {
+//                            androidGridView.setEnabled(false);
+//                            firstClick = false;
+//                        }
+
+                        if (image_list.size() == 1) {
+                            heldCardNo = 0;
+                            nextCardNo = 0;
+                            currentCard.setImageResource(image_list.get(heldCardNo));
+                            nextCard.setImageResource(R.drawable.clear);
+                        } else if (!image_list.isEmpty()) {
+                            currentCard.setImageResource(image_list.get(heldCardNo));
+                            nextCard.setImageResource(image_list.get(nextCardNo));
+                        } else {
+                            currentCard.setImageResource(R.drawable.clear);
+                            nextCard.setImageResource(R.drawable.clear);
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();
             }
         });
 
+
+        androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(CompassMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
+
+                ImageView nextCard = findViewById(R.id.nextCard);
+                ImageView currentCard = findViewById(R.id.heldCard);
+
+                image_list.add(compassAnswerGrid[position]);
+
+                if (image_list.size() == 1){
+                    currentCard.setImageResource(image_list.get(0));
+                    nextCard.setImageResource(R.drawable.clear);
+                    heldCardNo = 0;
+                    nextCardNo = 0;
+                }
+
+                if (image_list.size() == 2){
+                    nextCard.setImageResource(image_list.get(1));
+                    heldCardNo = 0;
+                    nextCardNo = 1;
+                }
+
+                compassAnswerGrid[position] = R.drawable.square;
+                adapter.notifyDataSetChanged();
+
+                return true;
+            }
+        });
     }
 
+
+
     public void getNextCard(View view){
-        ImageView nextCard = (ImageView) findViewById(R.id.nextCard);
-        ImageView currentCard = (ImageView) findViewById(R.id.heldCard);
+        ImageView nextCard = findViewById(R.id.nextCard);
+        ImageView currentCard = findViewById(R.id.heldCard);
 
-        if (heldCardNo < (imageList.size() - 1))
-        {
-            heldCardNo = nextCardNo;
+        if (!image_list.isEmpty()) {
+            if (image_list.size() == 1) {
+                heldCardNo = 0;
+                currentCard.setImageResource(image_list.get(heldCardNo));
+                nextCard.setImageResource(R.drawable.clear);
+            } else {
+
+
+                if (heldCardNo == image_list.size() - 1) {
+                    heldCardNo = 0;
+                    nextCardNo = 1;
+                } else if (nextCardNo == image_list.size() - 1) {
+                    heldCardNo += 1;
+                    nextCardNo = 0;
+                } else {
+                    heldCardNo += 1;
+                    nextCardNo = heldCardNo + 1;
+                }
+
+
+//            if (heldCardNo < (image_list.size() - 1)) {
+//                heldCardNo = nextCardNo;
+//            } else {
+//                heldCardNo = 0;
+//            }
+//
+//            if (nextCardNo == (image_list.size() - 1)) {
+//                nextCardNo = 0;
+//            } else {
+//                nextCardNo = heldCardNo + 1;
+//            }
+//
+//            if (image_list.size() == 2) {
+//                heldCardNo = 0;
+//                nextCardNo = 1;
+//            }
+
+                currentCard.setImageResource(image_list.get(heldCardNo));
+                nextCard.setImageResource(image_list.get(nextCardNo));
+            }
+
         }
-        else
-        {
-            heldCardNo = 0;
-        }
-
-
-        if (heldCardNo == (imageList.size() - 1))
-        {
-            nextCardNo = 0;
-        }
-        else
-        {
-            nextCardNo = heldCardNo + 1;
-        }
-
-
-        currentCard.setImageResource(imageList.get(heldCardNo));
-        nextCard.setImageResource(imageList.get(nextCardNo));
     }
 
 
