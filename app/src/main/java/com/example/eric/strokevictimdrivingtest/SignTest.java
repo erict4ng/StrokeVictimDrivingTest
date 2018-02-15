@@ -1,5 +1,6 @@
 package com.example.eric.strokevictimdrivingtest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -180,5 +181,18 @@ public class SignTest extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void finishTests(View view){
+
+
+
+        Bundle bundle = getIntent().getExtras();
+//        bundle.putLong("Dot_time", time_taken);
+
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        intent.putExtras(bundle);
+
+    startActivity(intent);
     }
 }

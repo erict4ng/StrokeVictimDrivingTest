@@ -228,6 +228,7 @@ public class DotCancelTest extends AppCompatActivity {
                 }
             }.start();
             textWarning.setText("");
+
         }else{
             textWarning.setText(R.string.instructionswrong);
         }

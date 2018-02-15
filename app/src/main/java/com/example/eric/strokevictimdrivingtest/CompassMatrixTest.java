@@ -226,8 +226,7 @@ public class CompassMatrixTest extends AppCompatActivity {
             Button startTest = findViewById(R.id.startButton);
 
 
-//            instructions.setVisibility(View.INVISIBLE);
-//            startTest.setVisibility(View.INVISIBLE);
+            startTest.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -293,15 +292,11 @@ public class CompassMatrixTest extends AppCompatActivity {
             }
         }
 
-        Button button = findViewById(R.id.button);
-        button.setText(String.valueOf(compassScore));
+        Bundle bundle = getIntent().getExtras();
+        bundle.putLong("Dot_time", compassScore);
 
-        //Bundle bundle = getIntent().getExtras();
-        //bundle.putString("test1_score", "8");
-        //bundle.putString("test1_time",String.valueOf(time_left));
-
-        Intent intent = new Intent(this, SignTest.class);
-        //intent.putExtras(bundle);
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        intent.putExtras(bundle);
 
         startActivity(intent);
     }
