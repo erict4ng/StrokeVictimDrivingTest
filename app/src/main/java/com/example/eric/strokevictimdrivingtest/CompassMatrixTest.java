@@ -1,5 +1,6 @@
 package com.example.eric.strokevictimdrivingtest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,17 +33,20 @@ public class CompassMatrixTest extends AppCompatActivity {
         Arrays.fill(compassAnswerGrid, R.drawable.square);
         Arrays.fill(matrix_test, false);
 
+        image_list.add(R.drawable.car_north_southwest);
+        image_list.add(R.drawable.car_west_southeast);
+        image_list.add(R.drawable.car_south_east);
 
         image_list.add(R.drawable.car_east_northeast);
         image_list.add(R.drawable.car_east_northwest);
         image_list.add(R.drawable.car_east_southeast);
-        image_list.add(R.drawable.car_east_southwest);
-        image_list.add(R.drawable.car_eastwest);
+        image_list.add(R.drawable.car_south_southeast);
+        image_list.add(R.drawable.car_south_southwest);
 
         image_list.add(R.drawable.car_north_northeast);
         image_list.add(R.drawable.car_north_northwest);
         image_list.add(R.drawable.car_north_southeast);
-        image_list.add(R.drawable.car_north_southwest);
+
         image_list.add(R.drawable.car_north_west);
 
         image_list.add(R.drawable.car_northeast);
@@ -51,21 +55,23 @@ public class CompassMatrixTest extends AppCompatActivity {
         image_list.add(R.drawable.car_northeast_southeast);
         image_list.add(R.drawable.car_northsouth);
 
+        image_list.add(R.drawable.car_east_southwest);
+        image_list.add(R.drawable.car_eastwest);
+
         image_list.add(R.drawable.car_northwest_southeast);
         image_list.add(R.drawable.car_northwest_southwest);
 
-        image_list.add(R.drawable.car_south_east);
+
         image_list.add(R.drawable.car_south_northeast);
         image_list.add(R.drawable.car_south_northwest);
-        image_list.add(R.drawable.car_south_southeast);
-        image_list.add(R.drawable.car_south_southwest);
+
 
         image_list.add(R.drawable.car_southeast_southwest);
         image_list.add(R.drawable.car_southwest);
 
         image_list.add(R.drawable.car_west_northeast);
         image_list.add(R.drawable.car_west_northwest);
-        image_list.add(R.drawable.car_west_southeast);
+
         image_list.add(R.drawable.car_west_southwest);
 
 
@@ -202,6 +208,21 @@ public class CompassMatrixTest extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void startNextTest(View view){
+        //long elapsedMillis = (SystemClock.elapsedRealtime() - overtime.getBase()) / 1000;
+        //timerText.setText(String.valueOf(elapsedMillis));
+        //overtime.stop();
+
+        //Bundle bundle = getIntent().getExtras();
+        //bundle.putString("test1_score", "8");
+        //bundle.putString("test1_time",String.valueOf(time_left));
+
+        Intent intent = new Intent(this, SignTest.class);
+        //intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 
 
