@@ -270,7 +270,7 @@ public class DotCancelTest extends AppCompatActivity {
     }
 
     public void removeMe(View view){
-        Intent intent = new Intent(this, SignTest.class);
+        Intent intent = new Intent(this, DirectionsMatrixTest.class);
         startActivity(intent);
     }
 

@@ -111,23 +111,25 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
 
-                imageList.add(directionsAnswerGrid[position]);
+                if (directionsAnswerGrid[position] != R.drawable.clear) {
+                    imageList.add(directionsAnswerGrid[position]);
 
-                if (imageList.size() == 1){
-                    currentCard.setImageResource(imageList.get(0));
-                    nextCard.setImageResource(R.drawable.clear);
-                    heldCardNo = 0;
-                    nextCardNo = 0;
+                    if (imageList.size() == 1) {
+                        currentCard.setImageResource(imageList.get(0));
+                        nextCard.setImageResource(R.drawable.clear);
+                        heldCardNo = 0;
+                        nextCardNo = 0;
+                    }
+
+                    if (imageList.size() == 2) {
+                        nextCard.setImageResource(imageList.get(1));
+                        heldCardNo = 0;
+                        nextCardNo = 1;
+                    }
+
+                    directionsAnswerGrid[position] = R.drawable.clear;
+                    adapter.notifyDataSetChanged();
                 }
-
-                if (imageList.size() == 2){
-                    nextCard.setImageResource(imageList.get(1));
-                    heldCardNo = 0;
-                    nextCardNo = 1;
-                }
-
-                directionsAnswerGrid[position] = R.drawable.clear;
-                adapter.notifyDataSetChanged();
 
                 return true;
             }
@@ -141,30 +143,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
         else
         {
-
-//            new CountDownTimer(timelimit, 1000) {
-//                public void onTick(long millisUntilFinished) {
-//                    //updates the time left every second
-//                    time_left = millisUntilFinished / 1000;
-//                }
-//                public void onFinish() {
-//                    time_left = 0;
-//                    //tells the user that the time is up
-//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
-//                    //records the scores
-//                    for (int i=23; i <directionsAnswerGrid.length; i++){
-//                        //records the correct dots that the user missed
-//                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
-//                            notCrossed += 1;
-//                        }
-//                        //records the dots that the user crossed that were incorrect
-//                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
-//                            wrongCrossed += 1;
-//                        }
-//                    }
-//                }
-//            }.start();
-
             androidGridView.setEnabled(true);
 
             TextView instructions = findViewById(R.id.instructionsTest);
