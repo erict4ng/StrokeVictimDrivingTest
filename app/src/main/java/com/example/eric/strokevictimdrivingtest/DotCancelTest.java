@@ -269,6 +269,19 @@ public class DotCancelTest extends AppCompatActivity {
         textWarning.setText("are you sure you wish to go to the next test?");
     }
 
+    public void dotHelp(View view){
+        Button helpButton = findViewById(R.id.btnHelp);
+        textWarning.setText(R.string.dotinstructions);
+        helpButton.setVisibility(View.INVISIBLE);
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                textWarning.setText("");
+            }
+        }.start();
+    }
+
     public void removeMe(View view){
         Intent intent = new Intent(this, DirectionsMatrixTest.class);
         startActivity(intent);

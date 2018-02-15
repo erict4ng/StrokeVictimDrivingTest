@@ -25,17 +25,15 @@
             android:name=".DotCancelTest"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".Settings"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".Login">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.eric.strokevictimdrivingtest.Login" />
-        </activity>
-        <activity android:name=".DirectionsMatrixTest" />
-        <activity android:name=".CompassMatrixTest" />
-        <activity android:name=".endPage" />
+        <activity android:name=".DirectionsMatrixTest"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />/>
+        <activity android:name=".CompassMatrixTest"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />/>
+        <activity android:name=".endPage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />/>
         <activity android:name=".SignTest"></activity>
     </application>
 
