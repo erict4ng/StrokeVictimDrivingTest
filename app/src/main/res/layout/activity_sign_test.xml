@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgHeldCard"
         android:layout_width="192dp"
         android:layout_height="186dp"
         android:layout_marginBottom="8dp"
@@ -35,7 +35,26 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.596"
         app:layout_constraintStart_toEndOf="@+id/gridSignsBoard"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/no_waiting" />
+        app:layout_constraintVertical_bias="0.093"
+        app:srcCompat="@drawable/children_sign" />
+
+    <ImageView
+        android:id="@+id/imgNextCard"
+        android:layout_width="160dp"
+        android:layout_height="148dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="getNextCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/gridSignsBoard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547"
+        app:srcCompat="@drawable/closed_lane" />
 </android.support.constraint.ConstraintLayout>

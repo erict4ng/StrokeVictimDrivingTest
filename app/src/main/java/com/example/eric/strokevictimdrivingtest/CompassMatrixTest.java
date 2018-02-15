@@ -92,31 +92,34 @@ public class CompassMatrixTest extends AppCompatActivity {
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.set(heldCardNo, temp);
                         currentCard.setImageResource(image_list.get(heldCardNo));
-                    } else {
+                    }
+                    else
+                    {
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.remove(heldCardNo);
 
 
-                        if (heldCardNo == image_list.size() - 1) {
+                        if (heldCardNo == image_list.size() - 1)
+                        {
                             heldCardNo = 0;
                             nextCardNo = 1;
                         }
 
 
-//                        if (firstClick) {
-//                            androidGridView.setEnabled(false);
-//                            firstClick = false;
-//                        }
-
-                        if (image_list.size() == 1) {
+                        if (image_list.size() == 1)
+                        {
                             heldCardNo = 0;
                             nextCardNo = 0;
                             currentCard.setImageResource(image_list.get(heldCardNo));
                             nextCard.setImageResource(R.drawable.clear);
-                        } else if (!image_list.isEmpty()) {
+                        }
+                        else if (!image_list.isEmpty())
+                        {
                             currentCard.setImageResource(image_list.get(heldCardNo));
                             nextCard.setImageResource(image_list.get(nextCardNo));
-                        } else {
+                        }
+                        else
+                        {
                             currentCard.setImageResource(R.drawable.clear);
                             nextCard.setImageResource(R.drawable.clear);
                         }
@@ -185,23 +188,6 @@ public class CompassMatrixTest extends AppCompatActivity {
                     nextCardNo = heldCardNo + 1;
                 }
 
-
-//            if (heldCardNo < (image_list.size() - 1)) {
-//                heldCardNo = nextCardNo;
-//            } else {
-//                heldCardNo = 0;
-//            }
-//
-//            if (nextCardNo == (image_list.size() - 1)) {
-//                nextCardNo = 0;
-//            } else {
-//                nextCardNo = heldCardNo + 1;
-//            }
-//
-//            if (image_list.size() == 2) {
-//                heldCardNo = 0;
-//                nextCardNo = 1;
-//            }
 
                 currentCard.setImageResource(image_list.get(heldCardNo));
                 nextCard.setImageResource(image_list.get(nextCardNo));
