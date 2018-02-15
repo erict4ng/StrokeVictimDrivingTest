@@ -32,6 +32,11 @@ public class SignTest extends AppCompatActivity {
 
     Boolean firstClick = true;
 
+    long signScore;
+
+    long time_limit = 180000;
+
+    boolean timeup = false;
 
     //declare gridview variables
     GridView androidGridView;
@@ -201,43 +206,21 @@ public class SignTest extends AppCompatActivity {
         }
         else
         {
-//            new CountDownTimer(time_limit, 1000) {
-//                public void onTick(long millisUntilFinished) {
-//                }
-//                public void onFinish() {
-////                    textWarning.setText("That’s fine, you have done enough now and can stop.");
-//                    //records the scores
-//                    for (int i=0; i <= directionsAnswerGrid.length-1; i++){
-//                        timeup = true;
-//                        if(!directionsAnswerGrid[i].equals(R.drawable.clear)) {
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
-//                                directionsScore += 1;
-//                            }
-//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
-//                                directionsScore += 1;
-//                            }
-//                        }
-//                    }
-//                }
-//            }.start();
+            new CountDownTimer(time_limit, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+                public void onFinish() {
+//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+                    //records the scores
+                    timeup = true;
+                    for (int i=0; i <SignsAnswerGrid.length - 1; i++){
+                        //records the correct dots that the user missed
+                        if (SignsAnswerGrid[i].equals(R.drawable.clear) && (SignsCorrectGrid[i].equals(R.drawable.cross))){
+                            signScore += 1;
+                        }
+                    }
+                }
+            }.start();
 
             androidGridView.setEnabled(true);
 
@@ -262,10 +245,17 @@ public class SignTest extends AppCompatActivity {
 
     public void finishTests(View view){
 
-
+        if(!timeup){
+            for (int i=0; i <SignsAnswerGrid.length - 1; i++){
+                //records the correct dots that the user missed
+                if (SignsAnswerGrid[i].equals(SignsCorrectGrid[i])){
+                    signScore += 1;
+                }
+            }
+        }
 
         Bundle bundle = getIntent().getExtras();
-//        bundle.putLong("Dot_time", time_taken);
+        bundle.putLong("Sign_Score", signScore);
 
         Intent intent = new Intent(this, endPage.class);
         intent.putExtras(bundle);

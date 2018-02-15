@@ -293,7 +293,7 @@ public class CompassMatrixTest extends AppCompatActivity {
         }
 
         Bundle bundle = getIntent().getExtras();
-        bundle.putLong("Dot_time", compassScore);
+        bundle.putLong("Compass_score", compassScore);
 
         Intent intent = new Intent(this, SignTest.class);
         intent.putExtras(bundle);

@@ -87,5 +87,10 @@ out a group of 3 or 5 dots but the task is to cross out all the groups of 4 dots
 
     <string name="directioninstructions"> The large arrows correspond to the lorries and the small arrows to the cars. Each arrow indicates a direction of travel. I want you to position these cards (indicate the car/lorry cards) so that each car is travelling in the direction indicated by the small arrow and each lorry in the direction indicated by the large arrow. I will do the first one as an example</string>
 
+    <string name= "compassinstructions">This time the black arm of the compass indicates a direction of travel.  position these cards on the grid, so that
+each of the vehicles on these cards. goes in the direction indicated on the compass cards. The roundabout sign is
+always at the bottom. There are more cards than available spaces, so
+some of the cards will not fit in. I will do the first one as an example.”</string>
+
     <string name= "signinstructions"> I would like you to put each road sign on the picture of the road situation which it matches best. The card in the top left shows a car stopped at a train crossing. The sign which best matches this situation is the one indicating a train crossing (which is top of your pile). So this sign (train crossing) goes with this picture. Tap the situation to put the sign on it. Then click "Start Test"</string>
 </resources>
