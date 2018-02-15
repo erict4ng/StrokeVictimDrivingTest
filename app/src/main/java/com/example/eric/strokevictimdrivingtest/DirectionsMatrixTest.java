@@ -288,9 +288,9 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
 
         Bundle bundle = getIntent().getExtras();
-        bundle.putLong("Dot_time", directionsScore);
+        bundle.putLong("Directions_score", directionsScore);
 
-        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        Intent intent = new Intent(this, CompassMatrixTest.class);
         intent.putExtras(bundle);
 
         startActivity(intent);

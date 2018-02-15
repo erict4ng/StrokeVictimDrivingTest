@@ -1,18 +1,24 @@
 package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class SignTest extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class SignTest extends AppCompatActivity {
     int heldCardNo = 0;
     int nextCardNo = 1;
 
+    Boolean firstClick = true;
 
 
     //declare gridview variables
@@ -37,6 +44,7 @@ public class SignTest extends AppCompatActivity {
 
         Arrays.fill(SignsAnswerGrid, R.drawable.clear);
 
+        sign_list.add(R.drawable.level_crossing);
         sign_list.add(R.drawable.children_sign);
         sign_list.add(R.drawable.closed_lane);
         sign_list.add(R.drawable.crossroads);
@@ -50,7 +58,7 @@ public class SignTest extends AppCompatActivity {
         sign_list.add(R.drawable.no_waiting);
         sign_list.add(R.drawable.road_works);
         sign_list.add(R.drawable.roundabout);
-        sign_list.add(R.drawable.level_crossing);
+
 
 
         SignsCorrectGrid[0] = R.drawable.level_crossing;
@@ -88,6 +96,10 @@ public class SignTest extends AppCompatActivity {
                                 SignsAnswerGrid[position] = sign_list.get(heldCardNo);
                                 sign_list.remove(heldCardNo);
 
+                                if (firstClick) {
+                                    androidGridView.setEnabled(false);
+                                    firstClick = false;
+                                }
 
                                 if (heldCardNo == sign_list.size() - 1)
                                 {
@@ -183,6 +195,71 @@ public class SignTest extends AppCompatActivity {
         }
     }
 
+    public void startTest(View view){
+        if(firstClick){
+            Toast.makeText(SignTest.this, "Please place the example image in the right slot!" , Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+//            new CountDownTimer(time_limit, 1000) {
+//                public void onTick(long millisUntilFinished) {
+//                }
+//                public void onFinish() {
+////                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+//                    //records the scores
+//                    for (int i=0; i <= directionsAnswerGrid.length-1; i++){
+//                        timeup = true;
+//                        if(!directionsAnswerGrid[i].equals(R.drawable.clear)) {
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
+//                                directionsScore += 1;
+//                            }
+//                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
+//                                directionsScore += 1;
+//                            }
+//                        }
+//                    }
+//                }
+//            }.start();
+
+            androidGridView.setEnabled(true);
+
+
+            Button startTest = findViewById(R.id.btnStartTest);
+
+            TextView instructionsTxt = (TextView) findViewById(R.id.instructionsTxt);
+            Button finishTest = (Button) findViewById(R.id.btnFinish);
+
+            finishTest.setVisibility(VISIBLE);
+            startTest.setVisibility(INVISIBLE);
+            instructionsTxt.setVisibility(INVISIBLE);
+            androidGridView.setEnabled(true);
+        }
+    }
+
+    public void confirm(View view){
+        Toast.makeText(SignTest.this, "Are you sure you wish to finish the test?" , Toast.LENGTH_SHORT).show();
+        Button finishTests = (Button) findViewById(R.id.confirmBtn);
+        finishTests.setVisibility(VISIBLE);
+    }
+
     public void finishTests(View view){
 
 
@@ -190,7 +267,7 @@ public class SignTest extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 //        bundle.putLong("Dot_time", time_taken);
 
-        Intent intent = new Intent(this, DirectionsMatrixTest.class);
+        Intent intent = new Intent(this, endPage.class);
         intent.putExtras(bundle);
 
     startActivity(intent);
