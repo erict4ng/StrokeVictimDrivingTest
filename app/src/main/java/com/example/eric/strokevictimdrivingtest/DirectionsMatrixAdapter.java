@@ -8,7 +8,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import java.util.Arrays;
 
-
 public class DirectionsMatrixAdapter extends BaseAdapter {
 
     private Context mContext;
