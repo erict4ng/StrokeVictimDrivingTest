@@ -2,7 +2,6 @@ package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +23,15 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     int nextCardNo = 1;
     Boolean firstClick = true;
     long time_limit = 180000;
+    long directionsScore = 0;
 
     GridView androidGridView;
     public Integer[] directionsAnswerGrid = new Integer[16];
     public Integer[] direcitonsCorrectGrid = new Integer[16];
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, directionsAnswerGrid);
+
+    TextView instructions;
 
 
     @Override
@@ -40,29 +42,31 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         Arrays.fill(directionsAnswerGrid, R.drawable.clear);
         Arrays.fill(direcitonsCorrectGrid, R.drawable.clear);
 
+        instructions = findViewById(R.id.txtInstructions);
+
         direcitonsCorrectGrid[0] = R.drawable.lorry_away_car_right;
-        direcitonsCorrectGrid[1] = R.drawable.both_away;
+        direcitonsCorrectGrid[1] = R.drawable.lorry_away_car_away;
         direcitonsCorrectGrid[2] = R.drawable.lorry_away_car_left;
         direcitonsCorrectGrid[3] = R.drawable.lorry_away_car_forward;
         direcitonsCorrectGrid[4] = R.drawable.lorry_forward_car_right;
         direcitonsCorrectGrid[5] = R.drawable.lorry_forward_car_away;
         direcitonsCorrectGrid[6] = R.drawable.lorry_forward_car_left;
-        direcitonsCorrectGrid[7] = R.drawable.both_front;
-        direcitonsCorrectGrid[8] = R.drawable.both_right;
-        direcitonsCorrectGrid[9] = R.drawable.directions_example;
+        direcitonsCorrectGrid[7] = R.drawable.lorry_forward_car_forward;
+        direcitonsCorrectGrid[8] = R.drawable.lorry_right_car_right;
+        direcitonsCorrectGrid[9] = R.drawable.lorry_right_car_away;
         direcitonsCorrectGrid[10] = R.drawable.lorry_right_car_left;
         direcitonsCorrectGrid[11] = R.drawable.lorry_right_car_forward;
-        direcitonsCorrectGrid[12] = R.drawable.left_lorry_right_car;
+        direcitonsCorrectGrid[12] = R.drawable.lorry_left_car_right;
         direcitonsCorrectGrid[13] = R.drawable.lorry_left_car_away;
-        direcitonsCorrectGrid[14] = R.drawable.both_left;
+        direcitonsCorrectGrid[14] = R.drawable.lorry_left_car_left;
         direcitonsCorrectGrid[15] = R.drawable.lorry_left_car_forward;
 
-        imageList.add(R.drawable.directions_example);
-        imageList.add(R.drawable.both_away);
-        imageList.add(R.drawable.both_front);
-        imageList.add(R.drawable.both_right);
-        imageList.add(R.drawable.both_left);
-        imageList.add(R.drawable.left_lorry_right_car);
+        imageList.add(R.drawable.lorry_right_car_away);
+        imageList.add(R.drawable.lorry_away_car_away);
+        imageList.add(R.drawable.lorry_forward_car_forward);
+        imageList.add(R.drawable.lorry_right_car_right);
+        imageList.add(R.drawable.lorry_left_car_left);
+        imageList.add(R.drawable.lorry_left_car_right);
         imageList.add(R.drawable.lorry_away_car_forward);
         imageList.add(R.drawable.lorry_away_car_left);
         imageList.add(R.drawable.lorry_away_car_right);
@@ -164,36 +168,52 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         else
         {
 
-//            new CountDownTimer(timelimit, 1000) {
-//                public void onTick(long millisUntilFinished) {
-//                    //updates the time left every second
-//                    time_left = millisUntilFinished / 1000;
-//                }
-//                public void onFinish() {
-//                    time_left = 0;
-//                    //tells the user that the time is up
+
+            new CountDownTimer(time_limit, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+                public void onFinish() {
 //                    textWarning.setText("That’s fine, you have done enough now and can stop.");
-//                    //records the scores
-//                    for (int i=23; i <directionsAnswerGrid.length; i++){
-//                        //records the correct dots that the user missed
-//                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
-//                            notCrossed += 1;
-//                        }
-//                        //records the dots that the user crossed that were incorrect
-//                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
-//                            wrongCrossed += 1;
-//                        }
-//                    }
-//                }
-//            }.start();
+                    //records the scores
+                    for (int i=0; i <= directionsAnswerGrid.length-1; i++){
+                        if(!directionsAnswerGrid[i].equals(R.drawable.clear)) {
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
+                                directionsScore += 1;
+                            }
+                            if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
+                                directionsScore += 1;
+                            }
+                        }
+                    }
+                }
+            }.start();
 
             androidGridView.setEnabled(true);
 
-            TextView instructions = findViewById(R.id.instructionsTest);
+
             Button startTest = findViewById(R.id.startButton);
 
-            instructions.setVisibility(View.INVISIBLE);
-            startTest.setVisibility(View.INVISIBLE);
+
+//            instructions.setVisibility(View.INVISIBLE);
+//            startTest.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -238,6 +258,37 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         //Bundle bundle = getIntent().getExtras();
         //bundle.putString("test1_score", "8");
         //bundle.putString("test1_time",String.valueOf(time_left));
+
+        for (int i=0; i <= directionsAnswerGrid.length-1; i++) {
+            if (!directionsAnswerGrid[i].equals(R.drawable.clear)) {
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
+                    directionsScore += 1;
+                }
+                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
+                    directionsScore += 1;
+                }
+            }
+        }
+
+        instructions.setText(String.valueOf(directionsScore));
 
         Intent intent = new Intent(this, CompassMatrixTest.class);
         //intent.putExtras(bundle);

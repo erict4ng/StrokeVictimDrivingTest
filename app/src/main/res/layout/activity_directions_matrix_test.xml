@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19"
-        app:srcCompat="@drawable/directions_example" />
+        app:srcCompat="@drawable/lorry_right_car_away" />
 
     <GridView
         android:id="@+id/directionsBoardGrid"
@@ -77,8 +77,8 @@
 
     <ImageView
         android:id="@+id/sideArrows"
-        android:layout_width="161dp"
-        android:layout_height="503dp"
+        android:layout_width="206dp"
+        android:layout_height="560dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -88,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/side_arrows" />
 
     <ImageView
@@ -107,7 +107,7 @@
         app:srcCompat="@drawable/top_arrows" />
 
     <TextView
-        android:id="@+id/instructionsTest"
+        android:id="@+id/txtInstructions"
         android:layout_width="392dp"
         android:layout_height="323dp"
         android:layout_marginBottom="8dp"
