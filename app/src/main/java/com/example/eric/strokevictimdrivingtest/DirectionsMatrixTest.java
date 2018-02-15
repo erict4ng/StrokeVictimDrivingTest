@@ -25,6 +25,8 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     long time_limit = 180000;
     long directionsScore = 0;
 
+    Boolean timeup = false;
+
     GridView androidGridView;
     public Integer[] directionsAnswerGrid = new Integer[16];
     public Integer[] direcitonsCorrectGrid = new Integer[16];
@@ -176,6 +178,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
 //                    textWarning.setText("That’s fine, you have done enough now and can stop.");
                     //records the scores
                     for (int i=0; i <= directionsAnswerGrid.length-1; i++){
+                        timeup = true;
                         if(!directionsAnswerGrid[i].equals(R.drawable.clear)) {
                             if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
                                 directionsScore += 1;
@@ -259,31 +262,33 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         //bundle.putString("test1_score", "8");
         //bundle.putString("test1_time",String.valueOf(time_left));
 
-        for (int i=0; i <= directionsAnswerGrid.length-1; i++) {
-            if (!directionsAnswerGrid[i].equals(R.drawable.clear)) {
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
-                    directionsScore += 1;
-                }
-                if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
-                    directionsScore += 1;
+        if(!timeup) {
+            for (int i = 0; i <= directionsAnswerGrid.length - 1; i++) {
+                if (!directionsAnswerGrid[i].equals(R.drawable.clear)) {
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_forward")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_left")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_right")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("lorry_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("lorry_away")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_forward") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_forward")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_left") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_left")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_right") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_right")) {
+                        directionsScore += 1;
+                    }
+                    if (getResources().getResourceName(directionsAnswerGrid[i]).contains("car_away") && getResources().getResourceName(direcitonsCorrectGrid[i]).contains("car_away")) {
+                        directionsScore += 1;
+                    }
                 }
             }
         }
