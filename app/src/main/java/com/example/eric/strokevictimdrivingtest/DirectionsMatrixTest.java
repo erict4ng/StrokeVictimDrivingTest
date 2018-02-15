@@ -236,12 +236,12 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         //timerText.setText(String.valueOf(elapsedMillis));
         //overtime.stop();
 
-        Bundle bundle = getIntent().getExtras();
-        bundle.putString("test1_score", "8");
+        //Bundle bundle = getIntent().getExtras();
+        //bundle.putString("test1_score", "8");
         //bundle.putString("test1_time",String.valueOf(time_left));
 
         Intent intent = new Intent(this, CompassMatrixTest.class);
-        intent.putExtras(bundle);
+        //intent.putExtras(bundle);
 
         startActivity(intent);
     }
