@@ -9,7 +9,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import junit.framework.Test;
+
 import java.util.Arrays;
+
+import static android.view.View.INVISIBLE;
 
 public class DotCancelTest extends AppCompatActivity {
 
@@ -198,11 +204,12 @@ public class DotCancelTest extends AppCompatActivity {
 
     //when the user chooses to start the test
     public void hideInstructions(View view){
+        Button startTest = (Button) findViewById(R.id.btnStartTest);
         //tests if the correct dots are crossed
         if ((DotAnswerGrid[1] == R.drawable.cross) && (DotAnswerGrid[8] == R.drawable.cross) && (DotAnswerGrid[9] == R.drawable.cross) && (DotAnswerGrid[13] == R.drawable.cross) &&
                 (DotAnswerGrid[14] == R.drawable.cross) && (DotAnswerGrid[15] == R.drawable.cross) && (DotAnswerGrid[17] == R.drawable.cross) && (DotAnswerGrid[22] == R.drawable.cross)){
             final TextView txtInstructions = findViewById(R.id.txtDialog);
-            txtInstructions.setVisibility(View.INVISIBLE);
+            txtInstructions.setVisibility(INVISIBLE);
             askConfirm.setVisibility(View.VISIBLE);
             //stars the timer
             timer = new CountDownTimer(timelimit, 1000) {
@@ -228,6 +235,8 @@ public class DotCancelTest extends AppCompatActivity {
                 }
             }.start();
             textWarning.setText("");
+
+            startTest.setVisibility(INVISIBLE);
 
         }else{
             textWarning.setText(R.string.instructionswrong);
@@ -266,14 +275,18 @@ public class DotCancelTest extends AppCompatActivity {
 
     //asks the user to confirm that they are done with the test
     public void askForConfirm(View view){
-        nextTest.setVisibility(View.VISIBLE);
-        textWarning.setText("are you sure you wish to go to the next test?");
+        askConfirm = findViewById(R.id.btnNexttest);
+
+        askConfirm.setVisibility(View.VISIBLE);
+        //textWarning.setText("are you sure you wish to go to the next test?");
+
+        Toast.makeText(DotCancelTest.this, "Are you sure you wish to go to the next test?" , Toast.LENGTH_SHORT).show();
     }
 
     public void dotHelp(View view){
         Button helpButton = findViewById(R.id.btnHelp);
         textWarning.setText(R.string.dotinstructions);
-        helpButton.setVisibility(View.INVISIBLE);
+        helpButton.setVisibility(INVISIBLE);
         new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
