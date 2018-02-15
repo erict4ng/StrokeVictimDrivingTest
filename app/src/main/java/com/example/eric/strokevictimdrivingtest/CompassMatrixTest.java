@@ -9,11 +9,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class CompassMatrixTest extends AppCompatActivity {
     List<Integer> image_list = new ArrayList<Integer>();
@@ -26,7 +30,7 @@ public class CompassMatrixTest extends AppCompatActivity {
     Integer[] compassAnswerGrid = new Integer[16];
     Integer[] compassCorrectGrid = new Integer[16];
 
-    boolean firstClick;
+    boolean firstClick = true;
 
     long compassScore;
 
@@ -145,7 +149,6 @@ public class CompassMatrixTest extends AppCompatActivity {
         androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(CompassMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
 
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
@@ -223,10 +226,26 @@ public class CompassMatrixTest extends AppCompatActivity {
             androidGridView.setEnabled(true);
 
 
-            Button startTest = findViewById(R.id.startButton);
-
+            Button startTest = findViewById(R.id.btnStartTest);
+            Button finishTest = findViewById(R.id.btnFinishTest);
 
             startTest.setVisibility(View.INVISIBLE);
+            finishTest.setVisibility(VISIBLE);
+
+            androidGridView.setEnabled(true);
+
+
+
+
+            TextView instructionsTxt = (TextView) findViewById(R.id.txtInstructions);
+
+
+            instructionsTxt.setVisibility(INVISIBLE);
+
+
+            androidGridView.setEnabled(true);
+
+
         }
     }
 
@@ -258,6 +277,14 @@ public class CompassMatrixTest extends AppCompatActivity {
             }
 
         }
+    }
+
+
+
+    public void confirm(View view){
+        Toast.makeText(CompassMatrixTest.this, "Are you sure you wish to finish the test?" , Toast.LENGTH_SHORT).show();
+        Button finishTests = (Button) findViewById(R.id.btnConfirm);
+        finishTests.setVisibility(VISIBLE);
     }
 
     public void startNextTest(View view){

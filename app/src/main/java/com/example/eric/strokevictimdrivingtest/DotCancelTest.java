@@ -296,10 +296,5 @@ public class DotCancelTest extends AppCompatActivity {
         }.start();
     }
 
-    public void removeMe(View view){
-        Intent intent = new Intent(this, DirectionsMatrixTest.class);
-        startActivity(intent);
-    }
-
 }
 

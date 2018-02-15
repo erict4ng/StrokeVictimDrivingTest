@@ -93,4 +93,6 @@ always at the bottom. There are more cards than available spaces, so
 some of the cards will not fit in. I will do the first one as an example.”</string>
 
     <string name= "signinstructions"> I would like you to put each road sign on the picture of the road situation which it matches best. The card in the top left shows a car stopped at a train crossing. The sign which best matches this situation is the one indicating a train crossing (which is top of your pile). So this sign (train crossing) goes with this picture. Tap the situation to put the sign on it. Then click "Start Test"</string>
+
+    <string name= "compassinstructins"></string>
 </resources>

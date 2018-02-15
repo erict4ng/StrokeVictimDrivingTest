@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.view.View.VISIBLE;
+
 public class DirectionsMatrixTest extends AppCompatActivity {
     List<Integer> imageList = new ArrayList<>();
 
@@ -212,8 +214,11 @@ public class DirectionsMatrixTest extends AppCompatActivity {
             Button startTest = findViewById(R.id.startButton);
 
 
-//            instructions.setVisibility(View.INVISIBLE);
-//            startTest.setVisibility(View.INVISIBLE);
+            instructions.setVisibility(View.INVISIBLE);
+            startTest.setVisibility(View.INVISIBLE);
+
+            Button finishTest = (Button) findViewById(R.id.btnFinishTest);
+            finishTest.setVisibility(VISIBLE);
         }
     }
 
@@ -250,11 +255,13 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     }
 
 
-    public void startNextTest(View view){
+    public void confirm(View view){
+        Toast.makeText(DirectionsMatrixTest.this, "Are you sure you wish to finish the test?" , Toast.LENGTH_SHORT).show();
+        Button finishTests = (Button) findViewById(R.id.btnConfirm);
+        finishTests.setVisibility(VISIBLE);
+    }
 
-        //Bundle bundle = getIntent().getExtras();
-        //bundle.putString("test1_score", "8");
-        //bundle.putString("test1_time",String.valueOf(time_left));
+    public void startNextTest(View view){
 
         if(!timeup) {
             for (int i = 0; i <= directionsAnswerGrid.length - 1; i++) {

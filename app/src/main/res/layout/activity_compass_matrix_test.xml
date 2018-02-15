@@ -56,15 +56,15 @@
 
     <ImageView
         android:id="@+id/imgTopcompass"
-        android:layout_width="847dp"
-        android:layout_height="143dp"
+        android:layout_width="804dp"
+        android:layout_height="117dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -123,7 +123,42 @@
         app:srcCompat="@drawable/car_west_se" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnStartTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="startTest"
+        android:text="Start Test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toEndOf="@+id/compassGrid"
+        app:layout_constraintTop_toBottomOf="@+id/nextCard"
+        app:layout_constraintVertical_bias="0.762" />
+
+    <Button
+        android:id="@+id/btnFinishTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="confirm"
+        android:text="Finish Test"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toEndOf="@+id/compassGrid"
+        app:layout_constraintTop_toBottomOf="@+id/nextCard"
+        app:layout_constraintVertical_bias="0.762" />
+
+    <Button
+        android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -131,13 +166,18 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="startNextTest"
-        android:text="Button"
+        android:text="Confirm"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toEndOf="@+id/compassGrid"
+        app:layout_constraintTop_toBottomOf="@+id/nextCard"
+        app:layout_constraintVertical_bias="0.762" /><![CDATA[
+
+    app:layout_constraintVertical_bias="0.986" />
+
+    ]]>
 
     <TextView
         android:id="@+id/txtInstructions"
@@ -154,21 +194,5 @@
         app:layout_constraintStart_toEndOf="@+id/directionsBoardGrid"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.737" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.257"
-        app:layout_constraintStart_toEndOf="@+id/compassGrid"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
 
 </android.support.constraint.ConstraintLayout>

@@ -141,7 +141,6 @@ public class SignTest extends AppCompatActivity {
         androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SignTest.this, "butts" , Toast.LENGTH_SHORT).show();
 
                 ImageView nextCard = findViewById(R.id.imgNextCard);
                 ImageView currentCard = findViewById(R.id.imgHeldCard);
