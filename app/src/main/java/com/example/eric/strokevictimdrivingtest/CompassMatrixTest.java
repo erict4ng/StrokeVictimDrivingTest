@@ -16,7 +16,7 @@ public class CompassMatrixTest extends AppCompatActivity {
     List<Integer> image_list = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
-    Boolean firstClick = true;
+    //Boolean firstClick = true;
 
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
@@ -29,7 +29,7 @@ public class CompassMatrixTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass_matrix_test);
 
-        Arrays.fill(compassAnswerGrid, R.drawable.car_east_southeast);
+        Arrays.fill(compassAnswerGrid, R.drawable.square);
         Arrays.fill(matrix_test, false);
 
 
@@ -67,7 +67,6 @@ public class CompassMatrixTest extends AppCompatActivity {
         image_list.add(R.drawable.car_west_northwest);
         image_list.add(R.drawable.car_west_southeast);
         image_list.add(R.drawable.car_west_southwest);
-        image_list.add(R.drawable.directions_example);
 
 
         androidGridView = findViewById(R.id.compassGrid);
@@ -82,7 +81,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                 ImageView currentCard = findViewById(R.id.heldCard);
 
                 if (!image_list.isEmpty()) {
-                    if (compassAnswerGrid[position] != R.drawable.clear) {
+                    if (compassAnswerGrid[position] != R.drawable.square) {
                         Integer temp = compassAnswerGrid[position];
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.set(heldCardNo, temp);
@@ -98,10 +97,10 @@ public class CompassMatrixTest extends AppCompatActivity {
                         }
 
 
-                        if (firstClick) {
-                            androidGridView.setEnabled(false);
-                            firstClick = false;
-                        }
+//                        if (firstClick) {
+//                            androidGridView.setEnabled(false);
+//                            firstClick = false;
+//                        }
 
                         if (image_list.size() == 1) {
                             heldCardNo = 0;
@@ -145,7 +144,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                     nextCardNo = 1;
                 }
 
-                compassAnswerGrid[position] = R.drawable.clear;
+                compassAnswerGrid[position] = R.drawable.square;
                 adapter.notifyDataSetChanged();
 
                 return true;
