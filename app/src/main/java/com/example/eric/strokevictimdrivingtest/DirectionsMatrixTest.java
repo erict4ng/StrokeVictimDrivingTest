@@ -1,6 +1,7 @@
 package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,7 +54,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         imageList.add(R.drawable.lorry_right_car_forward);
         imageList.add(R.drawable.lorry_right_car_left);
 
-
         androidGridView = findViewById(R.id.directionsBoardGrid);
         androidGridView.setAdapter(adapter);
 
@@ -79,35 +79,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                             heldCardNo = 0;
                             nextCardNo = 1;
                         }
-
-
-
-//                        if (heldCardNo == imageList.size() - 1){
-//                            heldCardNo = 0;
-//                            nextCardNo = 1;
-//                        }
-//                        else if (nextCardNo == imageList.size() - 1){
-//                            //heldCardNo += 1;
-//                            nextCardNo = 0;
-//                        }
-//                        else {
-//                            //heldCardNo += 1;
-//                            nextCardNo = heldCardNo + 1;
-//                        }
-
-//                        if (heldCardNo == imageList.size() - 1)
-//                        {
-//                            heldCardNo = 0;
-//                            nextCardNo = 1;
-//                        }
-//                        else if (nextCardNo == imageList.size() - 1) {
-//                            heldCardNo += 1;
-//                            nextCardNo = 0;
-//                        }
-//                        else
-//                        {
-//                            nextCardNo = heldCardNo + 1;
-//                        }
 
                         if (firstClick) {
                             androidGridView.setEnabled(false);
@@ -170,6 +141,30 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
         else
         {
+
+//            new CountDownTimer(timelimit, 1000) {
+//                public void onTick(long millisUntilFinished) {
+//                    //updates the time left every second
+//                    time_left = millisUntilFinished / 1000;
+//                }
+//                public void onFinish() {
+//                    time_left = 0;
+//                    //tells the user that the time is up
+//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+//                    //records the scores
+//                    for (int i=23; i <directionsAnswerGrid.length; i++){
+//                        //records the correct dots that the user missed
+//                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+//                            notCrossed += 1;
+//                        }
+//                        //records the dots that the user crossed that were incorrect
+//                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+//                            wrongCrossed += 1;
+//                        }
+//                    }
+//                }
+//            }.start();
+
             androidGridView.setEnabled(true);
 
             TextView instructions = findViewById(R.id.instructionsTest);
@@ -204,24 +199,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                     heldCardNo += 1;
                     nextCardNo = heldCardNo + 1;
                 }
-
-
-//            if (heldCardNo < (imageList.size() - 1)) {
-//                heldCardNo = nextCardNo;
-//            } else {
-//                heldCardNo = 0;
-//            }
-//
-//            if (nextCardNo == (imageList.size() - 1)) {
-//                nextCardNo = 0;
-//            } else {
-//                nextCardNo = heldCardNo + 1;
-//            }
-//
-//            if (imageList.size() == 2) {
-//                heldCardNo = 0;
-//                nextCardNo = 1;
-//            }
 
                 currentCard.setImageResource(imageList.get(heldCardNo));
                 nextCard.setImageResource(imageList.get(nextCardNo));
