@@ -35,4 +35,10 @@ public class endPage extends AppCompatActivity {
         "\n How do I interpret the results?\n" +
         "\n Generally speaking, a higher pass margin indicates that you should be eligible to drive. On the other hand a higher fail margin than pass margin suggests that you may not be capable of safe driving and therefore may not be eligible to drive, however, the final decision on this matter will be up to your medical professional’s discretion. \n \n As such, after these results, please contact your medical professional for further information");
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

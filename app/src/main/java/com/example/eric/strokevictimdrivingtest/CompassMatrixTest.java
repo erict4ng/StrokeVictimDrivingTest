@@ -329,4 +329,10 @@ public class CompassMatrixTest extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
+
 }

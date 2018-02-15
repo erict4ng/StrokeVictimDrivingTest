@@ -296,5 +296,10 @@ public class DotCancelTest extends AppCompatActivity {
         }.start();
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
 
