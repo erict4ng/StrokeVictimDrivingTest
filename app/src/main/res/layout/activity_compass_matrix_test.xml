@@ -71,7 +71,7 @@
         app:layout_constraintStart_toEndOf="@+id/compassGrid"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.328"
-        app:srcCompat="@drawable/car_north_southwest" />
+        app:srcCompat="@drawable/car_north_sw" />
 
     <ImageView
         android:id="@+id/nextCard"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toEndOf="@+id/compassGrid"
         app:layout_constraintTop_toBottomOf="@+id/heldCard"
         app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/car_west_southeast" />
+        app:srcCompat="@drawable/car_west_se" />
 
     <Button
         android:id="@+id/button"

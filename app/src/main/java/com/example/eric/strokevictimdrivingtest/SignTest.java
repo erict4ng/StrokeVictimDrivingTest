@@ -114,6 +114,7 @@ public class SignTest extends AppCompatActivity {
                                 }
                             }
                         }
+
                         imageAdapter.notifyDataSetChanged();
                     }
                 });

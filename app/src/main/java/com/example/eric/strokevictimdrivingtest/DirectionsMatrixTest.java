@@ -28,8 +28,8 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     Boolean timeup = false;
 
     GridView androidGridView;
-    public Integer[] directionsAnswerGrid = new Integer[16];
-    public Integer[] direcitonsCorrectGrid = new Integer[16];
+    Integer[] directionsAnswerGrid = new Integer[16];
+    Integer[] direcitonsCorrectGrid = new Integer[16];
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, directionsAnswerGrid);
 
@@ -132,7 +132,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(DirectionsMatrixTest.this, "butts" , Toast.LENGTH_SHORT).show();
 
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
@@ -169,8 +168,6 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
         else
         {
-
-
             new CountDownTimer(time_limit, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }

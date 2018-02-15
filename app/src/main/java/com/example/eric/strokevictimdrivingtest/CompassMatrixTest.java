@@ -1,10 +1,12 @@
 package com.example.eric.strokevictimdrivingtest;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,11 +19,16 @@ public class CompassMatrixTest extends AppCompatActivity {
     List<Integer> image_list = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
-    //Boolean firstClick = true;
-
+    long time_Limit = 300000;
+    Boolean timeup = false;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
-    public Integer[] compassAnswerGrid = new Integer[16];
+    Integer[] compassAnswerGrid = new Integer[16];
+    Integer[] compassCorrectGrid = new Integer[16];
+
+    boolean firstClick;
+
+    long compassScore;
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, compassAnswerGrid);
 
@@ -33,47 +40,49 @@ public class CompassMatrixTest extends AppCompatActivity {
         Arrays.fill(compassAnswerGrid, R.drawable.square);
         Arrays.fill(matrix_test, false);
 
-        image_list.add(R.drawable.car_north_southwest);
-        image_list.add(R.drawable.car_west_southeast);
-        image_list.add(R.drawable.car_south_east);
-
-        image_list.add(R.drawable.car_east_northeast);
-        image_list.add(R.drawable.car_east_northwest);
-        image_list.add(R.drawable.car_east_southeast);
-        image_list.add(R.drawable.car_south_southeast);
-        image_list.add(R.drawable.car_south_southwest);
-
-        image_list.add(R.drawable.car_north_northeast);
-        image_list.add(R.drawable.car_north_northwest);
-        image_list.add(R.drawable.car_north_southeast);
-
+        image_list.add(R.drawable.car_north_sw);
+        image_list.add(R.drawable.car_west_se);
+        image_list.add(R.drawable.car_south_ea);
+        image_list.add(R.drawable.car_ea_ne);
+        image_list.add(R.drawable.car_northwest_ea);
+        image_list.add(R.drawable.car_ea_se);
+        image_list.add(R.drawable.car_south_se);
+        image_list.add(R.drawable.car_south_sw);
+        image_list.add(R.drawable.car_north_ne);
+        image_list.add(R.drawable.car_north_nw);
+        image_list.add(R.drawable.car_north_se);
         image_list.add(R.drawable.car_north_west);
-
-        image_list.add(R.drawable.car_northeast);
-        image_list.add(R.drawable.car_northeast_northwest);
-        image_list.add(R.drawable.car_northeast_southwest);
-        image_list.add(R.drawable.car_northeast_southeast);
-        image_list.add(R.drawable.car_northsouth);
-
-        image_list.add(R.drawable.car_east_southwest);
-        image_list.add(R.drawable.car_eastwest);
-
-        image_list.add(R.drawable.car_northwest_southeast);
-        image_list.add(R.drawable.car_northwest_southwest);
-
-
-        image_list.add(R.drawable.car_south_northeast);
+        image_list.add(R.drawable.car_north_east);
+        image_list.add(R.drawable.car_northwest_ne);
+        image_list.add(R.drawable.car_ne_sw);
+        image_list.add(R.drawable.car_ne_se);
+        image_list.add(R.drawable.car_north_south);
+        image_list.add(R.drawable.car_northwest_se);
+        image_list.add(R.drawable.car_northwest_sw);
+        image_list.add(R.drawable.car_south_ne);
         image_list.add(R.drawable.car_south_northwest);
-
-
-        image_list.add(R.drawable.car_southeast_southwest);
-        image_list.add(R.drawable.car_southwest);
-
-        image_list.add(R.drawable.car_west_northeast);
+        image_list.add(R.drawable.car_se_sw);
+        image_list.add(R.drawable.car_south_west);
+        image_list.add(R.drawable.car_west_ne);
         image_list.add(R.drawable.car_west_northwest);
+        image_list.add(R.drawable.car_west_sw);
 
-        image_list.add(R.drawable.car_west_southwest);
-
+        compassCorrectGrid[0] = R.drawable.car_west_se;
+        compassCorrectGrid[1] = R.drawable.car_west_ne;
+        compassCorrectGrid[2] = R.drawable.car_west_sw;
+        compassCorrectGrid[3] = R.drawable.car_ea_west;
+        compassCorrectGrid[4] = R.drawable.car_northwest_se;
+        compassCorrectGrid[5] = R.drawable.car_northwest_ne;
+        compassCorrectGrid[6] = R.drawable.car_northwest_sw;
+        compassCorrectGrid[7] = R.drawable.car_northwest_ea;
+        compassCorrectGrid[8] = R.drawable.car_north_se;
+        compassCorrectGrid[9] = R.drawable.car_north_ne;
+        compassCorrectGrid[10] = R.drawable.car_north_sw;
+        compassCorrectGrid[11] = R.drawable.car_north_east;
+        compassCorrectGrid[12] = R.drawable.car_south_se;
+        compassCorrectGrid[13] = R.drawable.car_south_ne;
+        compassCorrectGrid[14] = R.drawable.car_south_sw;
+        compassCorrectGrid[15] = R.drawable.car_south_ea;
 
         androidGridView = findViewById(R.id.compassGrid);
         androidGridView.setAdapter(adapter);
@@ -105,9 +114,12 @@ public class CompassMatrixTest extends AppCompatActivity {
                             nextCardNo = 1;
                         }
 
+                        if (firstClick) {
+                            androidGridView.setEnabled(false);
+                            firstClick = false;
+                        }
 
-                        if (image_list.size() == 1)
-                        {
+                        if (image_list.size() == 1) {
                             heldCardNo = 0;
                             nextCardNo = 0;
                             currentCard.setImageResource(image_list.get(heldCardNo));
@@ -164,6 +176,60 @@ public class CompassMatrixTest extends AppCompatActivity {
     }
 
 
+    public void startTest(View view){
+        if(firstClick){
+            Toast.makeText(CompassMatrixTest.this, "Please place the example image!" , Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            new CountDownTimer(time_Limit, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+                public void onFinish() {
+//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+                    //records the scores
+                    for (int i=0; i <= compassAnswerGrid.length-1; i++){
+                        timeup = true;
+                        if(!compassAnswerGrid[i].equals(R.drawable.clear)) {
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("north") && getResources().getResourceName(compassCorrectGrid[i]).contains("north")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("northwest") && getResources().getResourceName(compassCorrectGrid[i]).contains("northwest")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("south") && getResources().getResourceName(compassCorrectGrid[i]).contains("south")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("west") && getResources().getResourceName(compassCorrectGrid[i]).contains("west")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("ne") && getResources().getResourceName(compassCorrectGrid[i]).contains("ne")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("ea") && getResources().getResourceName(compassCorrectGrid[i]).contains("ea")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("se") && getResources().getResourceName(compassCorrectGrid[i]).contains("se")) {
+                                compassScore += 1;
+                            }
+                            if (getResources().getResourceName(compassAnswerGrid[i]).contains("sw") && getResources().getResourceName(compassCorrectGrid[i]).contains("sw")) {
+                                compassScore += 1;
+                            }
+                        }
+                    }
+                }
+            }.start();
+
+            androidGridView.setEnabled(true);
+
+
+            Button startTest = findViewById(R.id.startButton);
+
+
+//            instructions.setVisibility(View.INVISIBLE);
+//            startTest.setVisibility(View.INVISIBLE);
+        }
+    }
 
     public void getNextCard(View view){
         ImageView nextCard = findViewById(R.id.nextCard);
@@ -188,7 +254,6 @@ public class CompassMatrixTest extends AppCompatActivity {
                     nextCardNo = heldCardNo + 1;
                 }
 
-
                 currentCard.setImageResource(image_list.get(heldCardNo));
                 nextCard.setImageResource(image_list.get(nextCardNo));
             }
@@ -197,9 +262,39 @@ public class CompassMatrixTest extends AppCompatActivity {
     }
 
     public void startNextTest(View view){
-        //long elapsedMillis = (SystemClock.elapsedRealtime() - overtime.getBase()) / 1000;
-        //timerText.setText(String.valueOf(elapsedMillis));
-        //overtime.stop();
+        if(!timeup) {
+            for (int i = 0; i <= compassAnswerGrid.length - 1; i++) {
+                if (!compassAnswerGrid[i].equals(R.drawable.clear)) {
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("north") && getResources().getResourceName(compassCorrectGrid[i]).contains("north")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("northwest") && getResources().getResourceName(compassCorrectGrid[i]).contains("northwest")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("south") && getResources().getResourceName(compassCorrectGrid[i]).contains("south")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("west") && getResources().getResourceName(compassCorrectGrid[i]).contains("west")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("ne") && getResources().getResourceName(compassCorrectGrid[i]).contains("ne")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("ea") && getResources().getResourceName(compassCorrectGrid[i]).contains("ea")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("se") && getResources().getResourceName(compassCorrectGrid[i]).contains("se")) {
+                        compassScore += 1;
+                    }
+                    if (getResources().getResourceName(compassAnswerGrid[i]).contains("sw") && getResources().getResourceName(compassCorrectGrid[i]).contains("sw")) {
+                        compassScore += 1;
+                    }
+                }
+            }
+        }
+
+        Button button = findViewById(R.id.button);
+        button.setText(String.valueOf(compassScore));
 
         //Bundle bundle = getIntent().getExtras();
         //bundle.putString("test1_score", "8");
