@@ -193,7 +193,6 @@ public class SignTest extends AppCompatActivity {
         Intent intent = new Intent(this, DirectionsMatrixTest.class);
         intent.putExtras(bundle);
 
-
     startActivity(intent);
     }
 }
