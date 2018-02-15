@@ -23,9 +23,11 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     int heldCardNo = 0;
     int nextCardNo = 1;
     Boolean firstClick = true;
+    long time_limit = 180000;
 
     GridView androidGridView;
     public Integer[] directionsAnswerGrid = new Integer[16];
+    public Integer[] direcitonsCorrectGrid = new Integer[16];
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, directionsAnswerGrid);
 
@@ -36,6 +38,24 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         setContentView(R.layout.activity_directions_matrix_test);
 
         Arrays.fill(directionsAnswerGrid, R.drawable.clear);
+        Arrays.fill(direcitonsCorrectGrid, R.drawable.clear);
+
+        direcitonsCorrectGrid[0] = R.drawable.lorry_away_car_right;
+        direcitonsCorrectGrid[1] = R.drawable.both_away;
+        direcitonsCorrectGrid[2] = R.drawable.lorry_away_car_left;
+        direcitonsCorrectGrid[3] = R.drawable.lorry_away_car_forward;
+        direcitonsCorrectGrid[4] = R.drawable.lorry_forward_car_right;
+        direcitonsCorrectGrid[5] = R.drawable.lorry_forward_car_away;
+        direcitonsCorrectGrid[6] = R.drawable.lorry_forward_car_left;
+        direcitonsCorrectGrid[7] = R.drawable.both_front;
+        direcitonsCorrectGrid[8] = R.drawable.both_right;
+        direcitonsCorrectGrid[9] = R.drawable.directions_example;
+        direcitonsCorrectGrid[10] = R.drawable.lorry_right_car_left;
+        direcitonsCorrectGrid[11] = R.drawable.lorry_right_car_forward;
+        direcitonsCorrectGrid[12] = R.drawable.left_lorry_right_car;
+        direcitonsCorrectGrid[13] = R.drawable.lorry_left_car_away;
+        direcitonsCorrectGrid[14] = R.drawable.both_left;
+        direcitonsCorrectGrid[15] = R.drawable.lorry_left_car_forward;
 
         imageList.add(R.drawable.directions_example);
         imageList.add(R.drawable.both_away);
@@ -143,6 +163,30 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         }
         else
         {
+
+//            new CountDownTimer(timelimit, 1000) {
+//                public void onTick(long millisUntilFinished) {
+//                    //updates the time left every second
+//                    time_left = millisUntilFinished / 1000;
+//                }
+//                public void onFinish() {
+//                    time_left = 0;
+//                    //tells the user that the time is up
+//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+//                    //records the scores
+//                    for (int i=23; i <directionsAnswerGrid.length; i++){
+//                        //records the correct dots that the user missed
+//                        if (DotAnswerGrid[i].equals(R.drawable.clear) && (DotCorrectGrid[i].equals(R.drawable.cross))){
+//                            notCrossed += 1;
+//                        }
+//                        //records the dots that the user crossed that were incorrect
+//                        if (DotAnswerGrid[i].equals(R.drawable.cross) && (DotCorrectGrid[i].equals(R.drawable.clear))){
+//                            wrongCrossed += 1;
+//                        }
+//                    }
+//                }
+//            }.start();
+
             androidGridView.setEnabled(true);
 
             TextView instructions = findViewById(R.id.instructionsTest);
