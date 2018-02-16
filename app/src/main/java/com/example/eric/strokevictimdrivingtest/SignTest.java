@@ -262,6 +262,19 @@ public class SignTest extends AppCompatActivity {
     startActivity(intent);
     }
 
+//    public void signHelp(View view){
+//        Button helpButton = findViewById(R.id.btnHelp);
+//        textWarning.setText(R.string.dotinstructions);
+//        helpButton.setVisibility(INVISIBLE);
+//        new CountDownTimer(10000, 1000) {
+//            public void onTick(long millisUntilFinished) {
+//            }
+//            public void onFinish() {
+//                textWarning.setText("");
+//            }
+//        }.start();
+//    }
+
 
     @Override
     public void onBackPressed() {

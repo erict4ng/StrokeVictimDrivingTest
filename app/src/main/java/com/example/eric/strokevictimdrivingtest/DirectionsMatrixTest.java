@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 public class DirectionsMatrixTest extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     Boolean firstClick = true;
     long time_limit = 180000;
     long directionsScore = 0;
+    TextView textDirectinosHelp;
 
     Boolean timeup = false;
 
@@ -42,6 +44,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_matrix_test);
+        textDirectinosHelp = findViewById(R.id.txtHelp);
 
         Arrays.fill(directionsAnswerGrid, R.drawable.clear);
         Arrays.fill(direcitonsCorrectGrid, R.drawable.clear);
@@ -301,6 +304,19 @@ public class DirectionsMatrixTest extends AppCompatActivity {
         intent.putExtras(bundle);
 
         startActivity(intent);
+    }
+
+    public void directionHelp (View view){
+        Button helpButton = findViewById(R.id.btnHelp);
+        textDirectinosHelp.setText(R.string.dotinstructions);
+        helpButton.setVisibility(INVISIBLE);
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                textDirectinosHelp.setText("");
+            }
+        }.start();
     }
 
 

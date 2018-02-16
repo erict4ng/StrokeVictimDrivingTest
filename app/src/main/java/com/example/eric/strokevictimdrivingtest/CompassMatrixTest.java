@@ -23,7 +23,7 @@ public class CompassMatrixTest extends AppCompatActivity {
     List<Integer> image_list = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
-    long time_Limit = 300000;
+    long time_Limit = 1000;
     Boolean timeup = false;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
@@ -328,6 +328,18 @@ public class CompassMatrixTest extends AppCompatActivity {
         startActivity(intent);
     }
 
+//    public void signHelp (View view){
+//        Button helpButton = findViewById(R.id.btnHelp);
+//        textSignHelp.setText(R.string.dotinstructions);
+//        helpButton.setVisibility(INVISIBLE);
+//        new CountDownTimer(10000, 1000) {
+//            public void onTick(long millisUntilFinished) {
+//            }
+//            public void onFinish() {
+//                textSignHelp.setText("");
+//            }
+//        }.start();
+//    }
 
     @Override
     public void onBackPressed() {

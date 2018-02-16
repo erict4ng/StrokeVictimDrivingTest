@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     tools:context="com.example.eric.strokevictimdrivingtest.SignTest">
 
+    <TextView
+        android:id="@+id/txtHeldCard3"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Current Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <TextView
+        android:id="@+id/txtNextcard3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Next Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363" />
+
     <GridView
         android:id="@+id/gridSignsBoard"
         android:layout_width="1010dp"
@@ -35,16 +67,16 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.596"
+        app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toEndOf="@+id/gridSignsBoard"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039"
+        app:layout_constraintVertical_bias="0.071"
         app:srcCompat="@drawable/level_crossing" />
 
     <ImageView
         android:id="@+id/imgNextCard"
         android:layout_width="160dp"
-        android:layout_height="148dp"
+        android:layout_height="152dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -52,10 +84,10 @@
         android:onClick="getNextCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toEndOf="@+id/gridSignsBoard"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442"
+        app:layout_constraintVertical_bias="0.498"
         app:srcCompat="@drawable/closed_lane" />
 
     <Button
@@ -96,19 +128,19 @@
     <TextView
         android:id="@+id/instructionsTxt"
         android:layout_width="241dp"
-        android:layout_height="359dp"
+        android:layout_height="218dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/background_light"
+        android:background="?android:attr/detailsElementBackground"
         android:text="@string/signinstructions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/gridSignsBoard"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintVertical_bias="0.531" />
 
     <Button
         android:id="@+id/confirmBtn"
