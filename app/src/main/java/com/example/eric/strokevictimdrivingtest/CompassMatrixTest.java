@@ -27,6 +27,9 @@ public class CompassMatrixTest extends AppCompatActivity {
     Boolean timeup = false;
     GridView androidGridView;
     boolean[] matrix_test = new boolean[16];
+
+    TextView textCompassHelp;
+
     Integer[] compassAnswerGrid = new Integer[16];
     Integer[] compassCorrectGrid = new Integer[16];
 
@@ -42,6 +45,7 @@ public class CompassMatrixTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass_matrix_test);
 
+        textCompassHelp = findViewById(R.id.txtCompassHelp);
         //
         Arrays.fill(compassAnswerGrid, R.drawable.clear);
         Arrays.fill(matrix_test, false);
@@ -330,18 +334,18 @@ public class CompassMatrixTest extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void signHelp (View view){
-//        Button helpButton = findViewById(R.id.btnHelp);
-//        textSignHelp.setText(R.string.dotinstructions);
-//        helpButton.setVisibility(INVISIBLE);
-//        new CountDownTimer(10000, 1000) {
-//            public void onTick(long millisUntilFinished) {
-//            }
-//            public void onFinish() {
-//                textSignHelp.setText("");
-//            }
-//        }.start();
-//    }
+    public void compassHelp (View view){
+        Button helpButton = findViewById(R.id.btnCompassHelp);
+        textCompassHelp.setText(R.string.compasshelp);
+        helpButton.setVisibility(INVISIBLE);
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                textCompassHelp.setText("");
+            }
+        }.start();
+    }
 
     @Override
     public void onBackPressed() {

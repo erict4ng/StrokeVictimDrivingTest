@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +24,8 @@ public class SignTest extends AppCompatActivity {
     public Integer[] SignsAnswerGrid = new Integer[13];
 
     public Integer[] SignsCorrectGrid = new Integer[13];
+
+    TextView textSignHelp;
 
     List<Integer> sign_list = new ArrayList<Integer>();
     int heldCardNo = 0;
@@ -46,6 +47,8 @@ public class SignTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_test);
+
+        textSignHelp = findViewById(R.id.txtSignHelp);
 
         Arrays.fill(SignsAnswerGrid, R.drawable.clear);
 
@@ -229,6 +232,10 @@ public class SignTest extends AppCompatActivity {
             TextView instructionsTxt = (TextView) findViewById(R.id.instructionsTxt);
             Button finishTest = (Button) findViewById(R.id.btnFinish);
 
+            Button helpBtn = findViewById(R.id.btnHelp);
+
+            helpBtn.setVisibility(VISIBLE);
+
             finishTest.setVisibility(VISIBLE);
             startTest.setVisibility(INVISIBLE);
             instructionsTxt.setVisibility(INVISIBLE);
@@ -262,19 +269,22 @@ public class SignTest extends AppCompatActivity {
     startActivity(intent);
     }
 
-//    public void signHelp(View view){
-//        Button helpButton = findViewById(R.id.btnHelp);
-//        textWarning.setText(R.string.dotinstructions);
-//        helpButton.setVisibility(INVISIBLE);
-//        new CountDownTimer(10000, 1000) {
-//            public void onTick(long millisUntilFinished) {
-//            }
-//            public void onFinish() {
-//                textWarning.setText("");
-//            }
-//        }.start();
-//    }
 
+    public void signHelp (View view){
+
+        Button helpButton = findViewById(R.id.btnHelp);
+
+        textSignHelp.setText(R.string.signhelp);
+
+        helpButton.setVisibility(INVISIBLE);
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                textSignHelp.setText("");
+            }
+        }.start();
+    }
 
     @Override
     public void onBackPressed() {

@@ -152,10 +152,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toEndOf="@+id/compassGrid"
         app:layout_constraintTop_toBottomOf="@+id/nextCard"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintVertical_bias="0.763" />
 
     <Button
         android:id="@+id/btnConfirm"
@@ -182,9 +182,9 @@
     <TextView
         android:id="@+id/txtInstructions"
         android:layout_width="392dp"
-        android:layout_height="323dp"
+        android:layout_height="173dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/detailsElementBackground"
@@ -193,6 +193,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/directionsBoardGrid"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.565" />
+
+    <TextView
+        android:id="@+id/txtCompassHelp"
+        android:layout_width="394dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toEndOf="@+id/compassGrid"
+        app:layout_constraintTop_toBottomOf="@+id/txtInstructions"
+        app:layout_constraintVertical_bias="0.078" />
+
+    <Button
+        android:id="@+id/btnCompassHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="compassHelp"
+        android:text="Help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnFinishTest"
+        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintStart_toEndOf="@+id/btnStartTest"
+        app:layout_constraintTop_toBottomOf="@+id/txtCompassHelp"
+        app:layout_constraintVertical_bias="0.069" />
 
 </android.support.constraint.ConstraintLayout>

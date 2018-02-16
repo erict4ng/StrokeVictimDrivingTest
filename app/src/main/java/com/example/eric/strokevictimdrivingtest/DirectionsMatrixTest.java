@@ -44,7 +44,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_matrix_test);
-        textDirectinosHelp = findViewById(R.id.txtHelp);
+        textDirectinosHelp = findViewById(R.id.txtSignHelp);
 
         Arrays.fill(directionsAnswerGrid, R.drawable.clear);
         Arrays.fill(direcitonsCorrectGrid, R.drawable.clear);
@@ -307,8 +307,9 @@ public class DirectionsMatrixTest extends AppCompatActivity {
     }
 
     public void directionHelp (View view){
-        Button helpButton = findViewById(R.id.btnHelp);
-        textDirectinosHelp.setText(R.string.dotinstructions);
+        Button helpButton = findViewById(R.id.btnDirectionsHelp);
+        textDirectinosHelp = findViewById(R.id.txtSignHelp);
+        textDirectinosHelp.setText(R.string.directionhelp);
         helpButton.setVisibility(INVISIBLE);
         new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
