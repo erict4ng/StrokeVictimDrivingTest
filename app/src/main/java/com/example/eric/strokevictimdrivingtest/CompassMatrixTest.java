@@ -36,12 +36,14 @@ public class CompassMatrixTest extends AppCompatActivity {
 
     DirectionsMatrixAdapter adapter = new DirectionsMatrixAdapter(this, compassAnswerGrid);
 
+    //initilises variables, lists, and onClicks for the answer grid on activity start
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass_matrix_test);
 
-        Arrays.fill(compassAnswerGrid, R.drawable.square);
+        //
+        Arrays.fill(compassAnswerGrid, R.drawable.clear);
         Arrays.fill(matrix_test, false);
 
         image_list.add(R.drawable.car_north_sw);
@@ -100,7 +102,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                 ImageView currentCard = findViewById(R.id.heldCard);
 
                 if (!image_list.isEmpty()) {
-                    if (compassAnswerGrid[position] != R.drawable.square) {
+                    if (compassAnswerGrid[position] != R.drawable.clear) {
                         Integer temp = compassAnswerGrid[position];
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.set(heldCardNo, temp);
@@ -153,7 +155,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                 ImageView nextCard = findViewById(R.id.nextCard);
                 ImageView currentCard = findViewById(R.id.heldCard);
 
-                if (compassAnswerGrid[position] != R.drawable.square) {
+                if (compassAnswerGrid[position] != R.drawable.clear) {
                     image_list.add(compassAnswerGrid[position]);
 
                     if (image_list.size() == 1) {
@@ -169,7 +171,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                         nextCardNo = 1;
                     }
 
-                    compassAnswerGrid[position] = R.drawable.square;
+                    compassAnswerGrid[position] = R.drawable.clear;
                     adapter.notifyDataSetChanged();
                 }
 
