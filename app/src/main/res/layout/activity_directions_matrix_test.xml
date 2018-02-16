@@ -141,7 +141,7 @@
     <TextView
         android:id="@+id/txtInstructions"
         android:layout_width="392dp"
-        android:layout_height="200dp"
+        android:layout_height="212dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -153,14 +153,14 @@
         app:layout_constraintHorizontal_bias="0.319"
         app:layout_constraintStart_toEndOf="@+id/directionsBoardGrid"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="8dp"
         android:onClick="startTest"
         android:text="Start Test"
@@ -218,7 +218,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintHorizontal_bias="0.748"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.963" />
@@ -226,7 +226,7 @@
     <TextView
         android:id="@+id/txtHelp"
         android:layout_width="380dp"
-        android:layout_height="116dp"
+        android:layout_height="94dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -239,5 +239,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.868" />
+
+    <Button
+        android:id="@+id/btnDirectionsHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="directionHelp"
+        android:text="Help"
+        tools:layout_editor_absoluteX="995dp"
+        tools:layout_editor_absoluteY="585dp" />
 
 </android.support.constraint.ConstraintLayout>
