@@ -67,8 +67,6 @@ public class SignTest extends AppCompatActivity {
         sign_list.add(R.drawable.road_works);
         sign_list.add(R.drawable.roundabout);
 
-
-
         SignsCorrectGrid[0] = R.drawable.level_crossing;
         SignsCorrectGrid[1] = R.drawable.children_sign;
         SignsCorrectGrid[2] = R.drawable.double_bend;
@@ -212,8 +210,8 @@ public class SignTest extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                 }
                 public void onFinish() {
-//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
                     //records the scores
+                    textSignHelp.setText("That’s fine, you have done enough now and can stop.");
                     timeup = true;
                     for (int i=0; i <SignsAnswerGrid.length - 1; i++){
                         //records the correct dots that the user missed

@@ -177,6 +177,7 @@ public class DirectionsMatrixTest extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                 }
                 public void onFinish() {
+                    textDirectinosHelp.setText("That’s fine, you have done enough now and can stop.");
 //                    textWarning.setText("That’s fine, you have done enough now and can stop.");
                     //records the scores
                     for (int i=0; i <= directionsAnswerGrid.length-1; i++){

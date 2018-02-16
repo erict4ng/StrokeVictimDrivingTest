@@ -23,10 +23,9 @@ public class CompassMatrixTest extends AppCompatActivity {
     List<Integer> image_list = new ArrayList<Integer>();
     int heldCardNo = 0;
     int nextCardNo = 1;
-    long time_Limit = 1000;
+    long time_Limit = 300000;
     Boolean timeup = false;
     GridView androidGridView;
-    boolean[] matrix_test = new boolean[16];
 
     TextView textCompassHelp;
 
@@ -46,10 +45,11 @@ public class CompassMatrixTest extends AppCompatActivity {
         setContentView(R.layout.activity_compass_matrix_test);
 
         textCompassHelp = findViewById(R.id.txtCompassHelp);
-        //
-        Arrays.fill(compassAnswerGrid, R.drawable.clear);
-        Arrays.fill(matrix_test, false);
 
+        //fills array so that nothing is null
+        Arrays.fill(compassAnswerGrid, R.drawable.clear);
+
+        //fills array with resources
         image_list.add(R.drawable.car_north_sw);
         image_list.add(R.drawable.car_west_se);
         image_list.add(R.drawable.car_south_ea);
@@ -77,6 +77,7 @@ public class CompassMatrixTest extends AppCompatActivity {
         image_list.add(R.drawable.car_west_northwest);
         image_list.add(R.drawable.car_west_sw);
 
+        //fills array with correct answers
         compassCorrectGrid[0] = R.drawable.car_west_se;
         compassCorrectGrid[1] = R.drawable.car_west_ne;
         compassCorrectGrid[2] = R.drawable.car_west_sw;
@@ -94,11 +95,9 @@ public class CompassMatrixTest extends AppCompatActivity {
         compassCorrectGrid[14] = R.drawable.car_south_sw;
         compassCorrectGrid[15] = R.drawable.car_south_ea;
 
+        //sets up gridview
         androidGridView = findViewById(R.id.compassGrid);
         androidGridView.setAdapter(adapter);
-
-
-
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -107,6 +106,7 @@ public class CompassMatrixTest extends AppCompatActivity {
 
                 if (!image_list.isEmpty()) {
                     if (compassAnswerGrid[position] != R.drawable.clear) {
+                        //swaps current card with card in grid
                         Integer temp = compassAnswerGrid[position];
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.set(heldCardNo, temp);
@@ -114,10 +114,11 @@ public class CompassMatrixTest extends AppCompatActivity {
                     }
                     else
                     {
+                        //set card in grid to be held card and removes held card from array
                         compassAnswerGrid[position] = image_list.get(heldCardNo);
                         image_list.remove(heldCardNo);
 
-
+                        //wrap around if end of cards
                         if (heldCardNo == image_list.size() - 1)
                         {
                             heldCardNo = 0;
@@ -129,12 +130,15 @@ public class CompassMatrixTest extends AppCompatActivity {
                             firstClick = false;
                         }
 
+                        //if the held card is the last set everything to the only card so nothing
+                        //goes out of bounds
                         if (image_list.size() == 1) {
                             heldCardNo = 0;
                             nextCardNo = 0;
                             currentCard.setImageResource(image_list.get(heldCardNo));
                             nextCard.setImageResource(R.drawable.clear);
                         }
+                        //refresh the cards
                         else if (!image_list.isEmpty())
                         {
                             currentCard.setImageResource(image_list.get(heldCardNo));
@@ -151,7 +155,7 @@ public class CompassMatrixTest extends AppCompatActivity {
             }
         });
 
-
+        //if the user long taps an item in the grid
         androidGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -195,7 +199,7 @@ public class CompassMatrixTest extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                 }
                 public void onFinish() {
-//                    textWarning.setText("That’s fine, you have done enough now and can stop.");
+                    textCompassHelp.setText("That’s fine, you have done enough now and can stop.");
                     //records the scores
                     for (int i=0; i <= compassAnswerGrid.length-1; i++){
                         timeup = true;
@@ -240,14 +244,9 @@ public class CompassMatrixTest extends AppCompatActivity {
 
             androidGridView.setEnabled(true);
 
-
-
-
             TextView instructionsTxt = (TextView) findViewById(R.id.txtInstructions);
 
-
             instructionsTxt.setVisibility(INVISIBLE);
-
 
             androidGridView.setEnabled(true);
 

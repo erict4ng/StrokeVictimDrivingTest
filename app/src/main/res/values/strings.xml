@@ -77,7 +77,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
 
     <string name="dotinstructions">As you can see that there are groups of dots. \n Some of the
-    groups have 3 dots, some 4 and some 5 dots. I want you to tap on the dots to cross out every group of 4 dots, if you make a mistake tap the same group of dots to remove the cross. I want you to complete the first row as a practice.\n The task is timed but it is more important to be accurate than fast.\n Start when you are ready, after you have completed the first rom tap on the "Begin test" button to start the test. </string>
+    groups have 3 dots, some 4 and some 5 dots. I want you to tap on the dots to cross out every group of 4 dots, if you make a mistake tap the same group of dots to remove the cross. I want you to complete the first row as a practice.\n As with all of these tests this is timed but it is more important to be accurate than fast.\n Start when you are ready, after you have completed the first rom tap on the "Begin test" button to start the test. </string>
 
     <string name="dotHelp">As you can see that there are groups of dots. \n Some of the
     groups have 3 dots, some 4 and some 5 dots. I want you to tap on the dots to cross out every group of 4 dots, if you make a mistake tap the same group of dots to remove the cross.</string>
